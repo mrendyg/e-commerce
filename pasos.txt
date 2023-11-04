@@ -1,0 +1,5 @@
+Para inicar frontend:
+1-en consola (ctrl + ñ)
+2-cd client
+3-npm i
+4-npm run dev
