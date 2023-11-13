@@ -88,8 +88,8 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ecommerce',
-        'USER': 'andyg',
-        'PASSWORD': '2022Anto-+',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
