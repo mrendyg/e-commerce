@@ -2,9 +2,8 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
 from . permissions import IsOwnerOrReadOnly
-from . models import Product, Review
+from . models import Producto, Review
 from . serializers import ProductSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
 
@@ -37,7 +36,7 @@ def create_product(request):
 
 @api_view(['GET'])
 def product_list(request):
-    products = Product.objects.all()
+    products = Producto.objects.all()
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductSerializer(paginated_products, many=True)
@@ -46,14 +45,14 @@ def product_list(request):
 
 @api_view(['GET'])
 def get_solo_product(request, name):
-    product = Product.objects.get(name=name)
+    product = Producto.objects.get(name=name)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 
 
 @api_view(['PUT'])
 def edit_product(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = Producto.objects.get(pk=pk)
     if request.user.is_staff:
         serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
@@ -65,7 +64,7 @@ def edit_product(request, pk):
 
 @api_view(['DELETE'])
 def delete_product(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = Producto.objects.get(pk=pk)
     if request.user.is_staff:
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -77,7 +76,7 @@ def search(request):
     query = request.query_params.get('query')
     if query is None:
         query = ''
-    prod = Product.objects.filter(name__icontains=query)
+    prod = Producto.objects.filter(name__icontains=query)
     serializer = ProductSerializer(prod, many=True)
     return Response({'products': serializer.data})
 

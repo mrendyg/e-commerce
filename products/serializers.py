@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from . models import Product, Review
+from . models import Producto, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = Product
+        model = Producto
         fields = "__all__"
 
     def get_reviews(self, obj):
