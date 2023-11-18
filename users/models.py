@@ -39,3 +39,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         ordering = ["-date_joined"]
+
+
+class MetodoPago(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=50)
+    numero = models.CharField(max_length=16)
+    expiracion = models.DateField()
+
+
+class DireccionEnvio(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    direccion = models.TextField(max_length=50)
+    ciudad = models.CharField(max_length=30)

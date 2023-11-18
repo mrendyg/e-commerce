@@ -19,3 +19,12 @@ class DetallePedido(models.Model):
     
     class Meta:
         db_table = 'DetallePedido'
+
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    fecha_crea = models.DateTimeField(auto_now_add=True)   #se debe agregar categoria? 
+    class Meta:
+        db_table = 'Carrito'    
