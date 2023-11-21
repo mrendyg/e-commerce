@@ -15,6 +15,7 @@ class Producto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     activo = models.BooleanField(default=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+    imagen = models.ImageField(upload_to='imagen_products/', null=True, blank=True)
     
     class Meta:
         db_table = 'Producto'

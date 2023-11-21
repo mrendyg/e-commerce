@@ -37,7 +37,7 @@ def create_product(request):
 
 @api_view(['GET'])
 def product_list(request):
-    products = Producto.objects.all()
+    products = Producto.objects.all() # se debe añadir un order by
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductSerializer(paginated_products, many=True)
@@ -46,7 +46,7 @@ def product_list(request):
 
 @api_view(['GET'])
 def get_solo_product(request, name):
-    product = Producto.objects.get(name=name)
+    product = Producto.objects.get(nombre=name)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 
