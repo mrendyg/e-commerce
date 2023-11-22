@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-
+import requests
 from . models import User
 from . serializers import RegisterUserSerializer, MyTokenObtainPairSerializer, UserSerializer
 
@@ -60,7 +60,8 @@ def get_users(request):
         users = User.objects.exclude(email='admin@admin.com')
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-    return Response(serializer.data, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['POST'])

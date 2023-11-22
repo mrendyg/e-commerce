@@ -1,4 +1,3 @@
-
 Para inicar frontend:
 1-en consola (ctrl + ñ)
 2-cd client

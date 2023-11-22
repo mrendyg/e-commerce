@@ -20,26 +20,26 @@ export const getProduct = async (name: string | undefined) => {
 
 export const putProduct = async (data: Product) => {
   const formData = new FormData();
-  formData.append("name", data.name);
-  formData.append("description", data.description);
+  formData.append("name", data.nombre);
+  formData.append("description", data.descripcion);
   formData.append("stock", data.count_in_stock.toString());
-  formData.append("category", data.category);
-  formData.append("price", data.price.toString());
-  if (data.image && typeof data.image !== "string") {
-    formData.append("image", data.image);
+  formData.append("category", data.categoria);
+  formData.append("price", data.precio.toString());
+  if (data.imagen && typeof data.imagen !== "string") {
+    formData.append("image", data.imagen);
   }
   await authApi.put(`products/update/${data.id}/`, formData);
 }
 
 export const postProduct = async (data: Product) => {
   const formData = new FormData();
-  formData.append("name", data.name);
-  formData.append("description", data.description);
+  formData.append("name", data.nombre);
+  formData.append("description", data.descripcion);
   formData.append("count_in_stock", data.count_in_stock.toString());
-  formData.append("category", data.category);
-  formData.append("price", data.price.toString());
-  if (data.image) {
-    formData.append("image", data.image);
+  formData.append("category", data.categoria);
+  formData.append("price", data.precio.toString());
+  if (data.imagen) {
+    formData.append("image", data.imagen);
   }
   await authApi.post('products/create/', formData);
 }

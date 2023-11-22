@@ -5,12 +5,7 @@ import Loader from "../components/Loader";
 import  toast from "react-hot-toast";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
-
-interface User {
-  id: string
-  username: string
-  email: string
-}
+import { User } from './InterfazUser';
 
 const Users = () => {
 
@@ -29,17 +24,17 @@ const Users = () => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-4 py-3">User ID</th>
+            <th scope="col" className="px-4 py-3">Name</th>
             <th scope="col" className="px-4 py-3">Email</th>
-            <th scope="col" className="px-4 py-3">Username</th>
             <th scope="col" className="px-4 py-3">Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          {data?.map((user: User) => (
+        {Array.isArray(data) && data.map((user: User) => (
             <tr className="border-b dark:border-gray-700">
               <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.id}</th>
-              <td className="px-4 py-3">{user.username}</td>
+              <td className="px-4 py-3">{user.name}</td>
               <td className="px-4 py-3">{user.email}</td>
               <td className="px-4 py-3 flex items-center justify-center gap-4">
                 <BsFillTrashFill size={22} 
