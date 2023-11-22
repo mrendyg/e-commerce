@@ -11,7 +11,7 @@ export const loginRequest = async (email: string, password: string) => {
 }
 
 export const getUsersRequest = async ({ pageParam = 1 }) => {
-  const response = await authApi.get(`/users/users/?page=${pageParam}&pages=10`);
+  const response = await authApi.get(`/users/get/?page=${pageParam}&pages=10`);
   return response.data;
 }
 

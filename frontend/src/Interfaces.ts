@@ -1,14 +1,13 @@
 export interface Product {
     id?: number
-    name: string
-    description: string
-    price: number
-    rating?: number
+    nombre: string
+    descripcion: string
+    precio: number
     count_in_stock : number
-    category: string
-    image: File | null;
-    quantity?: number
-    num_reviews?: number
+    activo: boolean
+    categoria: string
+    imagen: File | null;
+    cantidad?: number
   }
   
   export interface Token {
