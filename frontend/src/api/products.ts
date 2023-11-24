@@ -1,20 +1,20 @@
 import { authApi, axi } from "./useAxios"
 import { Product } from "../Interfaces"
 
-export const searchProducts = async (name: string) => {
-  const res = await axi.get(`products/search/?query=${name}`)
+export const searchProducts = async (id: number) => {
+  const res = await axi.get(`products/search/?query=${id}`)
   return res.data
 }
 
-export const deleteProduct = async (id: string) => {
-  await authApi.delete(`products/${id}/`)
+export const deleteProduct = async (id: number) => {
+  await authApi.delete(`products/delete/${id}/`)
 }
 
-export const getProduct = async (name: string | undefined) => {
-  if (!name) {
+export const getProduct = async (id: number) => {
+  if (!id) {
     throw new Error('No product found with that name.'); 
   }
-  const res = await axi.get(`products/get/${name}`)
+  const res = await axi.get(`products/get/${id}`)
   return res.data
 }
 
@@ -22,7 +22,7 @@ export const putProduct = async (data: Product) => {
   const formData = new FormData();
   formData.append("name", data.nombre);
   formData.append("description", data.descripcion);
-  formData.append("stock", data.count_in_stock.toString());
+  formData.append("stock", data.cantidad_stock.toString());
   formData.append("category", data.categoria);
   formData.append("price", data.precio.toString());
   if (data.imagen && typeof data.imagen !== "string") {
@@ -33,13 +33,14 @@ export const putProduct = async (data: Product) => {
 
 export const postProduct = async (data: Product) => {
   const formData = new FormData();
-  formData.append("name", data.nombre);
-  formData.append("description", data.descripcion);
-  formData.append("count_in_stock", data.count_in_stock.toString());
-  formData.append("category", data.categoria);
-  formData.append("price", data.precio.toString());
+  formData.append("nombre", data.nombre);
+  formData.append("descripcion", data.descripcion);
+  formData.append("count_in_stock", data.cantidad_stock.toString());
+  formData.append("activo", data.activo.toString());
+  formData.append("categoria", data.categoria);
+  formData.append("precio", data.precio.toString());
   if (data.imagen) {
-    formData.append("image", data.imagen);
+    formData.append("imagen", data.imagen);
   }
   await authApi.post('products/create/', formData);
 }
