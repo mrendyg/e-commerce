@@ -5,7 +5,7 @@ import Loader from '../components/Loader';
 import { toast } from 'react-hot-toast';
 
 interface Props {
-param: string
+param: number
            close: () => void
 }
 
@@ -13,18 +13,19 @@ param: string
 
 const EditProduct = ({ close, param }: Props) => {
 
-    const [name, setName] = useState<string>('');
-    const [countInStock, setCountInStock] = useState<number>(0);
-    const [category, setCategory] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [price, setPrice] = useState<number>(0);
-    const [image, setImage] = useState<File | null>(null);
+    const [nombre, setName] = useState<string>('');
+    const [cantidad_stock, setCountInStock] = useState<number>(0);
+    const [categoria, setCategory] = useState<string>('');
+    const [descripcion, setDescription] = useState<string>('');
+    const [precio, setPrice] = useState<number>(0);
+    const [imagen, setImage] = useState<File | null>(null);
+    const [activo, setActive] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>('');
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
     const queryClient = useQueryClient();
-    console.log(image)
+    console.log(imagen)
 
     const { data } = useQuery({
 queryFn: () => getProduct(param),
@@ -33,11 +34,12 @@ queryKey: ['product']
 
 useEffect(() => {
         if (data) {
-        setName(data.name);
-        setCountInStock(data.count_in_stock);
-        setCategory(data.category);
-        setDescription(data.description);
-        setImage(data.image);
+        setName(data.nombre);
+        setCountInStock(data.cantidad_stock);
+        setCategory(data.categoria);
+        setDescription(data.descripcion);
+        setImage(data.imagen);
+        setActive(data.activo)
         }
         }, [data]);
 
@@ -56,12 +58,13 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     editProdMutation.mutate({ 
 id: data.id,
-name: name, 
-count_in_stock: countInStock, 
-category: category, 
-description: description, 
-price: price, 
-image: image 
+nombre: nombre, 
+cantidad_stock: cantidad_stock, 
+categoria: categoria, 
+descripcion: descripcion, 
+precio: precio, 
+imagen: imagen, 
+activo: activo,
 });
 close()
     };
@@ -115,6 +118,14 @@ const removeImage = () => {
     setIsHovered(false)
 }
 
+const handleActiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const isChecked = event.target.checked;
+    setActive(isChecked);
+};
+
+
+
 
 if(editProdMutation.isLoading) return (<Loader/>)
 
@@ -140,7 +151,7 @@ return (
             <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
     <input 
-    value={name}
+    value={nombre}
     onChange={handleNameChange}
     type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name"/>
     </div>
@@ -148,7 +159,7 @@ return (
     <div>
     <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Count in Stock</label>
     <input 
-    value={countInStock}
+    value={cantidad_stock}
     onChange={handleCountChange}
     type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Count in Stock"/>
     </div>
@@ -156,7 +167,7 @@ return (
     <div>
     <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
     <input 
-    value={price}
+    value={precio}
     onChange={handlePriceChange}
     type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999"/>
     </div>
@@ -164,7 +175,7 @@ return (
     <div>
     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
     <input 
-    value={category}
+    value={categoria}
     onChange={handleCategoryChange}
     type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category"/>
     </div>
@@ -172,7 +183,7 @@ return (
     <div className="sm:col-span-2">
     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
     <input
-    value={description}
+    value={descripcion}
     onChange={handleDescriptionChange}
     id="description" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></input>                    
     </div>
@@ -180,7 +191,7 @@ return (
 
     <div className="sm:col-span-2">
     <div className="flex items-center justify-center w-full">
-{image === null ? (
+{imagen === null ? (
 
         <label
         htmlFor="dropzone-file"
@@ -235,7 +246,7 @@ className="absolute w-full h-[300px] opacity-0"
         </button>
         <img
         className='h-48 w-96'
-        src={filePreview || `http://127.0.0.1:8000/${data.image}`}
+        src={filePreview || `http://127.0.0.1:8000/${data.imagen}`}
         alt="Imagen seleccionada"
         />
         </div>

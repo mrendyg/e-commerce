@@ -63,13 +63,13 @@ const Order = () => {
 
                         <tr key={product.id} className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <th scope="row" className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <img src={`http://127.0.0.1:8000${product.image}`} alt={product.name} className="w-auto h-8 mr-3"/>
+                        <img src={`http://127.0.0.1:8000${product.imagen}`} alt={product.nombre} className="w-auto h-8 mr-3"/>
 
-                        {product.name}
+                        {product.nombre}
                         </th>
                         <td className="px-4 py-2">
                         <span className="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
-                        {product.category}
+                        {product.categoria}
                         </span>
                         </td>
                         <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -81,7 +81,7 @@ const Order = () => {
                             <svg className="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                         </button>
                         <div>
-                        {product.quantity}
+                        {product.cantidad_stock}
                             <input type="number" id="first_product" className="hidden bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required/>
                         </div>
                         <button 
@@ -92,9 +92,9 @@ const Order = () => {
                         </button>
                     </div>
                         </td>
-                        <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">${product.price}</td>
+                        <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">${product.precio}</td>
 
-                        <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">${product.price}</td>
+                        <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">${product.precio}</td>
 
                 </tr>
 

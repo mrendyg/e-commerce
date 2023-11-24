@@ -9,12 +9,13 @@ close: () => void
 
 const AddProduct = ({ close }: Props) => {
 
-    const [name, setName] = useState<string>('');
-    const [countInStock, setCountInStock] = useState<number>(0);
-    const [category, setCategory] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [price, setPrice] = useState<number>(0);
-    const [image, setImage] = useState<File | null>(null);
+    const [nombre, setName] = useState<string>('');
+    const [cantidad_stock, setCountInStock] = useState<number>(0);
+    const [categoria, setCategory] = useState<string>('');
+    const [descripcion, setDescription] = useState<string>('');
+    const [precio, setPrice] = useState<number>(0);
+    const [imagen, setImage] = useState<File | null>(null);
+    const [activo, setActive] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>('');
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -34,12 +35,13 @@ console.error(error);
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addProdMutation.mutate({ 
-name: name, 
-count_in_stock: countInStock, 
-category: category, 
-description: description, 
-price: price, 
-image: image 
+nombre: nombre, 
+cantidad_stock: cantidad_stock, 
+categoria: categoria, 
+descripcion: descripcion, 
+precio: precio, 
+imagen: imagen,
+activo: activo
 });
 close()
     };
@@ -78,6 +80,12 @@ const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     }
 };
 
+const handleActiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const isChecked = event.target.checked;
+    setActive(isChecked);
+};
+
 const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     setIsHovered(true);
@@ -103,7 +111,7 @@ if(addProdMutation.isLoading) return (<Loader/>)
             <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Add Product
+            Agregar producto
             </h3>
             <button 
             onClick={close}
@@ -116,49 +124,58 @@ if(addProdMutation.isLoading) return (<Loader/>)
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
 
             <div>
-            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
     <input 
-    value={name}
+    value={nombre}
     onChange={handleNameChange}
-    type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name"/>
+    type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 
+    focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
+    dark:focus:border-primary-500" placeholder="Nombre producto"/>
     </div>
 
     <div>
-    <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Count in Stock</label>
+    <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
     <input 
-    value={countInStock}
+    value={cantidad_stock}
     onChange={handleCountChange}
-    type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Count in Stock"/>
+    type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+    focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+    dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cantidad en stock"/>
     </div>
 
     <div>
-    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
     <input 
-    value={price}
+    value={precio}
     onChange={handlePriceChange}
-    type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999"/>
+    type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 
+    focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
+    dark:focus:border-primary-500" placeholder="$299.999"/>
     </div>
 
     <div>
-    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
     <input 
-    value={category}
+    value={categoria}
     onChange={handleCategoryChange}
-    type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category"/>
+    type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+    focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+    dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Categoria"/>
     </div>
 
     <div className="sm:col-span-2">
-    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
     <input
-    value={description}
+    value={descripcion}
     onChange={handleDescriptionChange}
-    id="description" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></input>                    
+    id="description" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 
+    focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
+    dark:focus:border-primary-500" placeholder="Escribe aquí la descripción del producto."></input>                    
     </div>
-
-
+    
     <div className="sm:col-span-2">
     <div className="flex items-center justify-center w-full">
-{image === null ? (
+{imagen === null ? (
         <label
         htmlFor="dropzone-file"
         className={`flex flex-col items-center justify-center w-full h-64 
@@ -223,10 +240,19 @@ className="absolute w-full h-[300px] opacity-0"
 
 
     </div>
-    <button type="submit" className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+    <button type="submit" className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none 
+    focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
     <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-    Add new product
+    Agregar producto
     </button>
+    
+    <div>
+        <label htmlFor="description" className="inline-flex  bottom:0 left:0 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Activo
+            <input required={activo} onChange={handleActiveChange} type="checkbox" id="Activo" className='inline-block'/>
+        </label>
+    </div>
+
     </form>
     </div>
     </div>

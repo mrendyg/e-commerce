@@ -5,6 +5,7 @@ import { useAuthStore } from '../store/auth';
 import { loginRequest } from '../api/users';
 import Loader from '../components/Loader';
 import { toast } from 'react-hot-toast';
+import { User } from '../admin/InterfazUser';
 
 
 const LoginPage = () => {

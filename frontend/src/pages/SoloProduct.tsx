@@ -1,4 +1,3 @@
-
 import { getProduct } from "../api/products";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
@@ -8,9 +7,9 @@ import Reviews from "../components/Reviews";
 
 const SoloProduct = () => {
 
-    const { name } = useParams();
+    const { nombre } = useParams();
 
-  const { data,  isLoading, error } = useQuery(['product', name], () => getProduct(name))
+    const { data,  isLoading, error } = useQuery(['product', nombre], () => getProduct(nombre))
 
     if (isLoading) return <Loader/>
     if(error instanceof Error) return <>{toast.error(error.message)}</>
@@ -21,10 +20,10 @@ const SoloProduct = () => {
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
         <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                {data.name}
+                {data.nombre}
             </h2>
             <p className="mb-4 font-bold">
-                {data.description}
+                {data.descripcion}
             </p>
         <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Add to Cart
@@ -36,7 +35,7 @@ const SoloProduct = () => {
             </div>
 
             <img className="w-full" 
-            src={`http://127.0.0.1:8000${data.image}`} alt="office content 1"/>
+            src={`http://127.0.0.1:8000${data.imagen}`} alt="office content 1"/>
 
             </div>
             </div>
