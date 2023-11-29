@@ -87,7 +87,6 @@ const Products = () => {
                     <th scope="col" className="px-4 py-3">Categoria</th>
                     <th scope="col" className="px-4 py-3">Stock</th>
                     <th scope="col" className="px-4 py-3">Pecios</th>
-                    <th scope="col" className="px-4 py-3">Sales</th>
                     <th scope="col" className="px-4 py-3">Acciones</th>
                   </tr>
                 </thead>
@@ -132,7 +131,7 @@ const Products = () => {
                                 <BsFillTrashFill 
                                   onClick={() => {
                                     if (product.id) {
-                                      deleteProductMutation.mutate(product.id);
+                                      deleteProductMutation.mutate(product.nombre);
                                     }
                                   }}
                                   className="text-red-500 w-6 h-6 cursor-pointer hover:text-white"/>
@@ -144,7 +143,8 @@ const Products = () => {
                           </tr>
         
               {edit && (
-        <EditProduct param={product.name} close={() => setEdit(false)} />
+                
+        <EditProduct param={product.nombre} close={() => setEdit(false)} />
 
               )}
 

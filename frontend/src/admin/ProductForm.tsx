@@ -8,7 +8,6 @@ close: () => void
 }
 
 const AddProduct = ({ close }: Props) => {
-
     const [nombre, setName] = useState<string>('');
     const [cantidad_stock, setCountInStock] = useState<number>(0);
     const [categoria, setCategory] = useState<string>('');
@@ -38,7 +37,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 nombre: nombre, 
 cantidad_stock: cantidad_stock, 
 categoria: categoria, 
-descripcion: descripcion, 
+descripcion: descripcion,
 precio: precio, 
 imagen: imagen,
 activo: activo

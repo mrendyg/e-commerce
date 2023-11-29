@@ -1,20 +1,20 @@
 import { authApi, axi } from "./useAxios"
 import { Product } from "../Interfaces"
 
-export const searchProducts = async (id: number) => {
-  const res = await axi.get(`products/search/?query=${id}`)
+export const searchProducts = async (nombre: string) => {
+  const res = await axi.get(`products/search/?query=${nombre}`)
   return res.data
 }
 
-export const deleteProduct = async (id: number) => {
-  await authApi.delete(`products/delete/${id}/`)
+export const deleteProduct = async (nombre: string) => {
+  await authApi.delete(`products/delete/${nombre}/`)
 }
 
-export const getProduct = async (id: number) => {
-  if (!id) {
-    throw new Error('No product found with that name.'); 
+export const getProduct = async (nombre: string) => {
+  if (!nombre) {
+    throw new Error('No se encontró ningún producto con ese nombre.'); 
   }
-  const res = await axi.get(`products/get/${id}`)
+  const res = await axi.get(`products/get/${nombre}`)
   return res.data
 }
 

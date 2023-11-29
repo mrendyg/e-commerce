@@ -15,7 +15,7 @@ const Home = () => {
         isLoading,
         error,
         isFetchingNextPage,
-        fetchNextPage,
+        fetchNextPage, 
         hasNextPage,
     } = useInfiniteQuery(["products"], getProducts, {
         getNextPageParam: (page: any) => page.meta.next,

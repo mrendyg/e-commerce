@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query"
 const SoloProduct = () => {
 
   const { data } = useQuery({
-    queryFn: () => getProduct(name),
-    queryKey: ['product', name]
+    queryFn: () => getProduct(nombre),
+    queryKey: ['product', nombre]
   })
 
   return (

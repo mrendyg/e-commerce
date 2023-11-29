@@ -17,7 +17,7 @@ const ProductCard = ({ product, page }: Props) => {
     <div>
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <Link to={`/product/${product.nombre}`}>
-            <img className="rounded-t-lg" src={`http://127.0.0.1:8000${product.imagen}`}  alt="" />
+            <img className="rounded-t-lg w-100 h-100 " src={`http://127.0.0.1:8000${product.imagen}`}  alt="" />
             </Link>
             <div className="p-5 ">
             <Link to={`/product/${product.nombre}`}>
@@ -30,7 +30,7 @@ const ProductCard = ({ product, page }: Props) => {
             </h5>
             <div className="flex items-center">
             <span className="ml-1 text-gray-500 dark:text-gray-400">
-    </span>
+    </span> 
         </div>
         </div>
         </Link>

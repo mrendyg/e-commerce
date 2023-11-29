@@ -1,6 +1,6 @@
-
-import { useQuery } from "@tanstack/react-query";
-import { getUsersRequest } from "../api/users";
+import React from "react";
+import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
+import { getUsersRequest, deleteUser } from "../api/users";
 import Loader from "../components/Loader";
 import  toast from "react-hot-toast";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -38,7 +38,13 @@ const Users = () => {
               <td className="px-4 py-3">{user.email}</td>
               <td className="px-4 py-3 flex items-center justify-center gap-4">
                 <BsFillTrashFill size={22} 
-                  className="text-red-300 cursor-pointer"/>
+                  onClick={() => {
+                    if (user.id) {
+                      deleteUserMutation.mutate(user.id);
+                    }
+                   }}
+                  className="text-red-500 w-6 h-6  cursor-pointer"
+                  />
                 <AiFillEdit size={22} className="text-green-300 cursor-pointer"/>
               </td>
             </tr>
@@ -49,4 +55,19 @@ const Users = () => {
   )
 }
 
-export default Users
+
+// const queryClient = useQueryClient()
+
+// const deleteUserMutation = useMutation({
+//   mutationFn: deleteUser,
+//   onSuccess: () => {
+//     queryClient.invalidateQueries(["users"])
+//     toast.success("User delete")
+//   }, 
+//   onError: (error) => {
+//     console.error(error);
+//   },
+// })
+
+
+// export default Users

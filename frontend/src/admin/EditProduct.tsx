@@ -2,11 +2,10 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { putProduct, getProduct } from '../api/products';
 import Loader from '../components/Loader';
-import { toast } from 'react-hot-toast';
 
 interface Props {
-param: number
-           close: () => void
+    param: number
+    close: () => void
 }
 
 // https://react-dropzone.org/#!/Examples
@@ -57,7 +56,6 @@ console.error(error);
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     editProdMutation.mutate({ 
-id: data.id,
 nombre: nombre, 
 cantidad_stock: cantidad_stock, 
 categoria: categoria, 

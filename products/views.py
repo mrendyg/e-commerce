@@ -33,8 +33,7 @@ def create_product(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-
+    
 @api_view(['GET'])
 def product_list(request):
     products = Producto.objects.all() # se debe añadir un order by

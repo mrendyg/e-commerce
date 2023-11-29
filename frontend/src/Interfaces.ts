@@ -3,6 +3,7 @@ export interface Product {
     nombre: string
     descripcion: string
     precio: number
+    cantidad?: number
     cantidad_stock: number
     activo: boolean
     categoria: string

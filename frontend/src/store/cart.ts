@@ -27,18 +27,18 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
 
   if (cartItem) {
    const updatedCart = cart.map(item =>
-    item.id === product.id ? { ...item, quantity: (item.quantity as number) + 1 } : item
+    item.id === product.id ? { ...item, cantidad: (item.cantidad as number) + 1 } : item
    )
    set(state => ({
     cart: updatedCart,
-    totalPrice: state.totalPrice + Number(product.price),
+    totalPrice: state.totalPrice + Number(product.precio),
    }))
   } else {
-   const updatedCart = [...cart, { ...product, quantity: 1 }]
+   const updatedCart = [...cart, { ...product, cantidad: 1 }]
 
    set(state => ({
     cart: updatedCart,
-    totalPrice: state.totalPrice + Number(product.price),
+    totalPrice: state.totalPrice + Number(product.precio),
    }))
   }
  },
@@ -47,18 +47,18 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
   const cart = get().cart
   const cartItem = cart.find(item => item.id === product.id)
 
-  if (cartItem && cartItem.quantity && cartItem.quantity > 1) {
+  if (cartItem && cartItem.cantidad && cartItem.cantidad > 1) {
    const updatedCart = cart.map(item =>
-    item.id === product.id ? { ...item, quantity: (item.quantity as number) - 1 } : item
+    item.id === product.id ? { ...item, quantity: (item.cantidad as number) - 1 } : item
    )
    set(state => ({
     cart: updatedCart,
-    totalPrice: state.totalPrice - Number(product.price),
+    totalPrice: state.totalPrice - Number(product.precio),
    }))
   } else {
     set(state => ({
         cart: state.cart.filter(item => item.id !== product.id),
-        totalPrice: state.totalPrice - Number(product.price),
+        totalPrice: state.totalPrice - Number(product.precio),
     }))
   }
  },
