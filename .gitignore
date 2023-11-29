@@ -1,2 +1,5 @@
 # Ignorar la carpeta 'mi-carpeta'
 movil/
+
+# Ignorar el archivo
+.env/
