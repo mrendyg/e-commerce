@@ -16,7 +16,7 @@ class Producto(models.Model):
     cantidad_stock = models.IntegerField(null=True, blank=True, default=0)
     activo = models.BooleanField(default=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
-    imagen = models.ImageField(upload_to='../media/imagen_products/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='./media/imagen_products/', null=True, blank=True)
     
     class Meta:
         db_table = 'Producto'
@@ -27,3 +27,6 @@ class Review(models.Model):
     rating = models.IntegerField(null=True, blank=True, default=0)
     comment = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Review'

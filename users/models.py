@@ -46,9 +46,14 @@ class MetodoPago(models.Model):
     tipo = models.CharField(max_length=50)
     numero = models.CharField(max_length=16)
     expiracion = models.DateField()
+    class Meta:
+        db_table = 'MetodoPago'
 
 
 class DireccionEnvio(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     direccion = models.TextField(max_length=50)
     ciudad = models.CharField(max_length=30)
+    ccomuna_id = models.IntegerField(null=True, blank=True)
+    class Meta:
+        db_table = 'DireccionEnvio'
