@@ -14,10 +14,10 @@ export const getProduct = async (nombre: string) => {
   if (!nombre) {
     throw new Error('No se encontró ningún producto con ese nombre.'); 
   }
-  else {
+
   const res = await axi.get(`products/get/${nombre}`)
   return res.data
-  }
+  
 }
 
 export const putProduct = async (data: Product) => {
