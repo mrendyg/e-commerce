@@ -51,8 +51,8 @@ def get_solo_product(request, name):
 
 
 @api_view(['PUT'])
-def edit_product(request, pk):
-    product = Producto.objects.get(pk=pk)
+def edit_product(request, name):
+    product = Producto.objects.get(nombre=name)
     if request.user.is_staff:
         serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():

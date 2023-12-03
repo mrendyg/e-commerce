@@ -53,7 +53,7 @@ const Home = () => {
 
                     {!isLoading && data?.pages.length === 0 && (
                         <p className="text-xl text-slate-800 dark:text-slate-200">
-                            No more results
+                            No hay mas resultados
                         </p>
                     )}
                     {!isLoading &&

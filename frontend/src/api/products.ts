@@ -14,8 +14,10 @@ export const getProduct = async (nombre: string) => {
   if (!nombre) {
     throw new Error('No se encontró ningún producto con ese nombre.'); 
   }
+  else {
   const res = await axi.get(`products/get/${nombre}`)
   return res.data
+  }
 }
 
 export const putProduct = async (data: Product) => {
@@ -28,7 +30,7 @@ export const putProduct = async (data: Product) => {
   if (data.imagen && typeof data.imagen !== "string") {
     formData.append("image", data.imagen);
   }
-  await authApi.put(`products/update/${data.id}/`, formData);
+  await authApi.put(`products/update/${data.nombre}/`, formData);
 }
 
 export const postProduct = async (data: Product) => {

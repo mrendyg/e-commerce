@@ -4,7 +4,7 @@ import { putProduct, getProduct } from '../api/products';
 import Loader from '../components/Loader';
 
 interface Props {
-    param: number
+    param: string
     close: () => void
 }
 
@@ -115,15 +115,6 @@ const removeImage = () => {
     setImage(null)
     setIsHovered(false)
 }
-
-const handleActiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const isChecked = event.target.checked;
-    setActive(isChecked);
-};
-
-
-
 
 if(editProdMutation.isLoading) return (<Loader/>)
 

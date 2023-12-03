@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
 import { getUsersRequest, deleteUser } from "../api/users";
 import Loader from "../components/Loader";
@@ -23,10 +22,10 @@ const Users = () => {
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-4 py-3">User ID</th>
-            <th scope="col" className="px-4 py-3">Name</th>
-            <th scope="col" className="px-4 py-3">Email</th>
-            <th scope="col" className="px-4 py-3">Actions</th>
+            <th scope="col" className="px-4 py-3">ID Usuario</th>
+            <th scope="col" className="px-4 py-3">Nombre</th>
+            <th scope="col" className="px-4 py-3">Correo</th>
+            <th scope="col" className="px-4 py-3">Acciones</th>
           </tr>
         </thead>
 
@@ -40,7 +39,7 @@ const Users = () => {
                 <BsFillTrashFill size={22} 
                   onClick={() => {
                     if (user.id) {
-                      deleteUserMutation.mutate(user.id);
+                      //deleteUserMutation.mutate(user.id);
                     }
                    }}
                   className="text-red-500 w-6 h-6  cursor-pointer"
@@ -56,18 +55,7 @@ const Users = () => {
 }
 
 
-// const queryClient = useQueryClient()
-
-// const deleteUserMutation = useMutation({
-//   mutationFn: deleteUser,
-//   onSuccess: () => {
-//     queryClient.invalidateQueries(["users"])
-//     toast.success("User delete")
-//   }, 
-//   onError: (error) => {
-//     console.error(error);
-//   },
-// })
 
 
-// export default Users
+
+export default Users

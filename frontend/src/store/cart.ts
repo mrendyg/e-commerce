@@ -8,9 +8,10 @@ interface State {
 }
 
 interface Actions {
- addToCart: (Item: Product) => void
- removeFromCart: (Item: Product) => void
+  addToCart: (Item: Product) => void
+  removeFromCart: (Item: Product) => void
 }
+ 
 
 const State = {
  cart: [],
@@ -49,7 +50,7 @@ export const useCartStore = create(persist<State & Actions>((set, get) => ({
 
   if (cartItem && cartItem.cantidad && cartItem.cantidad > 1) {
    const updatedCart = cart.map(item =>
-    item.id === product.id ? { ...item, quantity: (item.cantidad as number) - 1 } : item
+    item.id === product.id ? { ...item, cantidad: (item.cantidad as number) - 1 } : item
    )
    set(state => ({
     cart: updatedCart,

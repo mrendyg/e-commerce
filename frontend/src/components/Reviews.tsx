@@ -1,4 +1,3 @@
-import img from "../img/man.png"
 
 const Reviews = () => {
 
@@ -17,7 +16,6 @@ const Reviews = () => {
 
 <article className="container mx-auto ">
     <div className="flex items-center mb-4 space-x-4">
-        <img className="w-10 h-10 rounded-full" src={img} alt=""/>
         <div className="space-y-1 font-medium dark:text-white">
             <p>Manuel M</p>
         </div>

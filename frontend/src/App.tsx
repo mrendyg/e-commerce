@@ -1,13 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Layout from "./components/Layout";
 import { PrivateRoute, AdminRoute } from "./components/PrivateRoute";
-
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home"
-
 import AdminPage from "./pages/AdminPage";
 import SoloProduct from "./pages/SoloProduct";
 import Order from "./pages/Order";
