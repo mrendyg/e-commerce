@@ -30,7 +30,7 @@ const Products = () => {
     mutationFn: deleteProduct,
     onSuccess: () => {
       queryClient.invalidateQueries(["products"])
-      toast.success("Product deleted successfully")
+      toast.success("Producto eliminado exitosamente")
     }, 
     onError: (error) => {
       console.error(error);
@@ -129,7 +129,11 @@ const Products = () => {
                                   }}
                                   className="text-red-500 w-6 h-6 cursor-pointer hover:text-white"/>
                                 <AiFillEdit 
-                                    onClick={() => setEdit(true)}
+                                    onClick={() => { 
+                                      if (product.id) {
+                                        setEdit(true)
+                                        console.log("Estas editando " + product.nombre)     ////Revisar esta linea para poder editar los articulos
+                                      }}}
                                   className="text-blue-500 w-6 h-6 cursor-pointer hover:text-white"/>
                               </div>
                             </td>

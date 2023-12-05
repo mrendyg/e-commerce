@@ -5,7 +5,6 @@ export interface Product {
     precio: number
     cantidad?: number
     cantidad_stock: number
-    activo: boolean
     categoria: string
     imagen: File | null;
   }

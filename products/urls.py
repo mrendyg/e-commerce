@@ -6,9 +6,9 @@ urlpatterns = [
     path('create/', views.create_product),
     path('get/<str:name>/', views.get_solo_product),
     path('update/<str:name>/', views.edit_product),
-    path('delete/<int:pk>/', views.delete_product),
+    path('delete/<str:name>/', views.delete_product),
     # path('<str:name>/', views.product_detail),
-    path('review/<int:pk>/', views.ReviewList.as_view()),
-    path('review/<int:pk>/', views.ReviewDetail.as_view()),
+    path('review/<str:name>/', views.ReviewList.as_view()),
+    path('review/<str:name>/', views.ReviewDetail.as_view()),
     path('search/', views.search),
 ]

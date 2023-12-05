@@ -52,19 +52,20 @@ def get_solo_product(request, name):
 
 @api_view(['PUT'])
 def edit_product(request, name):
-    product = Producto.objects.get(nombre=name)
+    producto = Producto.objects.get(nombre=name)
     if request.user.is_staff:
-        serializer = ProductSerializer(product, data=request.data)
+        serializer = ProductSerializer(producto, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    print(request.data)
     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(['DELETE'])
-def delete_product(request, pk):
-    product = Producto.objects.get(pk=pk)
+def delete_product(request, name):
+    product = Producto.objects.get(nombre=name)
     if request.user.is_staff:
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

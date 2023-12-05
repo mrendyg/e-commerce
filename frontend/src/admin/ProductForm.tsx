@@ -14,7 +14,6 @@ const AddProduct = ({ close }: Props) => {
     const [descripcion, setDescription] = useState<string>('');
     const [precio, setPrice] = useState<number>(0);
     const [imagen, setImage] = useState<File | null>(null);
-    const [activo, setActive] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>('');
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -34,14 +33,13 @@ console.error(error);
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addProdMutation.mutate({ 
-nombre: nombre, 
-cantidad_stock: cantidad_stock, 
-categoria: categoria, 
-descripcion: descripcion,
-precio: precio, 
-imagen: imagen,
-activo: activo
-});
+        nombre: nombre, 
+        cantidad_stock: cantidad_stock, 
+        categoria: categoria, 
+        descripcion: descripcion,
+        precio: precio, 
+        imagen: imagen
+    });
 close()
     };
 
@@ -77,12 +75,6 @@ const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         };
         reader.readAsDataURL(file);
     }
-};
-
-const handleActiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const isChecked = event.target.checked;
-    setActive(isChecked);
 };
 
 const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
@@ -244,14 +236,6 @@ className="absolute w-full h-[300px] opacity-0"
     <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
     Agregar producto
     </button>
-    
-    <div>
-        <label htmlFor="description" className="inline-flex  bottom:0 left:0 mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Activo
-            <input required={activo} onChange={handleActiveChange} type="checkbox" id="Activo" className='inline-block'/>
-        </label>
-    </div>
-
     </form>
     </div>
     </div>

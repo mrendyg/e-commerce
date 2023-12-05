@@ -18,7 +18,6 @@ const EditProduct = ({ close, param }: Props) => {
     const [descripcion, setDescription] = useState<string>('');
     const [precio, setPrice] = useState<number>(0);
     const [imagen, setImage] = useState<File | null>(null);
-    const [activo, setActive] = useState<boolean>(false);
     const [filePreview, setFilePreview] = useState<string>('');
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -33,12 +32,11 @@ queryKey: ['product']
 
 useEffect(() => {
         if (data) {
-        setName(data.nombre);
-        setCountInStock(data.cantidad_stock);
-        setCategory(data.categoria);
-        setDescription(data.descripcion);
-        setImage(data.imagen);
-        setActive(data.activo)
+            setName(data.nombre);
+            setCountInStock(data.cantidad_stock);
+            setCategory(data.categoria);
+            setDescription(data.descripcion);
+            setImage(data.imagen);
         }
         }, [data]);
 
@@ -56,16 +54,15 @@ console.error(error);
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     editProdMutation.mutate({ 
-nombre: nombre, 
-cantidad_stock: cantidad_stock, 
-categoria: categoria, 
-descripcion: descripcion, 
-precio: precio, 
-imagen: imagen, 
-activo: activo,
-});
-close()
-    };
+        nombre: nombre, 
+        cantidad_stock: cantidad_stock, 
+        categoria: categoria, 
+        descripcion: descripcion, 
+        precio: precio, 
+        imagen: imagen
+    });
+    close()
+};
 
 const handleNameChange= (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -125,7 +122,7 @@ return (
             <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Add Product
+            Agregar producto
             </h3>
             <button 
             onClick={close}
@@ -138,7 +135,7 @@ return (
             <div className="grid gap-4 mb-4 sm:grid-cols-2">
 
             <div>
-            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
     <input 
     value={nombre}
     onChange={handleNameChange}
@@ -146,7 +143,7 @@ return (
     </div>
 
     <div>
-    <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Count in Stock</label>
+    <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
     <input 
     value={cantidad_stock}
     onChange={handleCountChange}
@@ -154,7 +151,7 @@ return (
     </div>
 
     <div>
-    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
     <input 
     value={precio}
     onChange={handlePriceChange}
@@ -162,7 +159,7 @@ return (
     </div>
 
     <div>
-    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
     <input 
     value={categoria}
     onChange={handleCategoryChange}
@@ -170,7 +167,7 @@ return (
     </div>
 
     <div className="sm:col-span-2">
-    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion</label>
     <input
     value={descripcion}
     onChange={handleDescriptionChange}
@@ -248,7 +245,7 @@ className="absolute w-full h-[300px] opacity-0"
     </div>
     <button type="submit" className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
     <svg className="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-    Edit product
+    Editar producto
     </button>
     </form>
     </div>
