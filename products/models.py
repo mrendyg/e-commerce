@@ -14,7 +14,12 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     cantidad_stock = models.IntegerField(null=True, blank=True, default=0)
+<<<<<<< HEAD
     #usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+=======
+    activo = models.BooleanField(default=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+>>>>>>> 31cdad0e94d39894b080fed5a755e41df0ab7c09
     imagen = models.ImageField(upload_to='./media/imagen_products/', null=True, blank=True)
     
     class Meta:
@@ -27,3 +32,8 @@ class Review(models.Model):
     comment = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
+<<<<<<< HEAD
+=======
+    class Meta:
+        db_table = 'Review'
+>>>>>>> 31cdad0e94d39894b080fed5a755e41df0ab7c09
