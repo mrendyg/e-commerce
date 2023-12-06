@@ -23,7 +23,7 @@ const EditProduct = ({ close, param }: Props) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const queryClient = useQueryClient();
-    console.log(imagen)
+    //console.log(imagen)
 
     const { data } = useQuery({
 queryFn: () => getProduct(param),
