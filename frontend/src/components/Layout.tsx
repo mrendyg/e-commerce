@@ -11,7 +11,7 @@ const Layout = () => {
 
     /*
     if (searchTerm !== '') {
-        // mostra los resultados haciendo un get request de los cursos 
+        // mostra los resultados haciendo un get request
     }
     */
 

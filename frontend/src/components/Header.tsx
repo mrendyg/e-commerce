@@ -83,14 +83,14 @@ const Header = () => {
                           to={'/'}
                           className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
                         >
-                          Home
+                          Inicio
                         </Link>
 
                         <Link
                           to={'/'}
                           className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                         >
-                          Categories
+                          Categorias
                         </Link>
                       </>
 
@@ -117,7 +117,7 @@ const Header = () => {
                         to={'/admin'}
                         className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                       >
-                        Admin Panel
+                        Panel de administrador
                       </Link>
                     )}
 
@@ -187,7 +187,7 @@ const Header = () => {
                               href="#"
                               className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
                             >
-                              Your Profile
+                              Tu perfil
                             </a>
                           )}
                         </Menu.Item>
@@ -197,7 +197,7 @@ const Header = () => {
                               onClick={logOutFun}
                               className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer dark:text-slate-200')}
                             >
-                              Sign out
+                              Cerrar sesion
                             </span>
                           )}
                         </Menu.Item>
@@ -223,7 +223,7 @@ const Header = () => {
                 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
                 bg-gray-50 dark:bg-gray-700 outline-none
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  
-                " placeholder="Search..."/>
+                " placeholder="Buscar..."/>
             </div>
 
             <div className="space-y-1 px-2 pb-3 pt-2">

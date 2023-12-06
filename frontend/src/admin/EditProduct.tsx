@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { putProduct, getProduct } from '../api/products';
 import Loader from '../components/Loader';
+import { Product } from '../Interfaces';
 
 interface Props {
     param: string
@@ -23,16 +24,15 @@ const EditProduct = ({ close, param }: Props) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const queryClient = useQueryClient();
-
     //console.log(imagen)
 
 
     const { data } = useQuery({
-queryFn: () => getProduct(param),
-queryKey: ['product']
-});
+        queryFn: () => getProduct(param),
+        queryKey: ['product']
+    });
 
-useEffect(() => {
+    useEffect(() => {
         if (data) {
             setName(data.nombre);
             setCountInStock(data.cantidad_stock);
@@ -40,81 +40,84 @@ useEffect(() => {
             setPrice(data.precio);
             setDescription(data.descripcion);
             setImage(data.imagen);
+
         }
         }, [data]);
 
 
-const editProdMutation = useMutation({
-mutationFn: putProduct,
-onSuccess: () => {
-queryClient.invalidateQueries({ queryKey: ["product"] });
-},
-onError: (error) => {
-console.error(error);
-},
-});
-
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    editProdMutation.mutate({ 
-        nombre: nombre, 
-        cantidad_stock: cantidad_stock, 
-        categoria: categoria, 
-        descripcion: descripcion, 
-        precio: precio, 
-        imagen: imagen
+    const editProdMutation = useMutation({
+        mutationFn: putProduct,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["product"] });
+        },
+        onError: (error) => {
+            console.error(error);
+        },
     });
-    close()
-};
 
-const handleNameChange= (event: ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-};
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        editProdMutation.mutate({ 
+            id: data.id,
+            nombre: nombre, 
+            cantidad_stock: cantidad_stock, 
+            categoria: categoria, 
+            descripcion: descripcion, 
+            precio: precio, 
+            imagen: imagen
+        });
+        close()
+    };
 
-const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCategory(event.target.value);
-};
 
-const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
-};
+    const handleNameChange= (event: ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    };
 
-const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newNumber = parseInt(event.target.value, 10);
-    setCountInStock(newNumber);
-};
+    const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setCategory(event.target.value);
+    };
 
-const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newNumber = parseInt(event.target.value, 10);
-    setPrice(newNumber);
-};
+    const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setDescription(event.target.value);
+    };
 
-const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    if (file) {
-        setImage(file);
-        const reader = new FileReader();
-        reader.onload = () => {
-            setFilePreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
+    const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newNumber = parseInt(event.target.value, 10);
+        setCountInStock(newNumber);
+    };
+
+    const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newNumber = parseInt(event.target.value, 10);
+        setPrice(newNumber);
+    };
+
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files && event.target.files[0];
+        if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onload = () => {
+                setFilePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
+        event.preventDefault();
+        setIsHovered(true);
+    };
+
+    const handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
+        event.preventDefault();
+        setIsHovered(false);
+    };
+
+    const removeImage = () => {
+        setImage(null)
+        setIsHovered(false)
     }
-};
-
-const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    setIsHovered(true);
-};
-
-const handleDragLeave = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    setIsHovered(false);
-};
-
-const removeImage = () => {
-    setImage(null)
-    setIsHovered(false)
-}
 
 if(editProdMutation.isLoading) return (<Loader/>)
 
@@ -139,72 +142,75 @@ return (
 
             <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+
     <input 
-    value={nombre}
-    onChange={handleNameChange}
-    type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name"/>
+        value={nombre}
+        onChange={handleNameChange}
+        type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name"/>
     </div>
 
     <div>
     <label htmlFor="count_in_stock" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
     <input 
-    value={cantidad_stock}
-    onChange={handleCountChange}
-    type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Count in Stock"/>
+        value={cantidad_stock}
+        onChange={handleCountChange}
+        type="number" name="count_in_stock" id="count_in_stock" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Count in Stock"/>
     </div>
 
     <div>
     <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
     <input 
-    value={precio}
-    onChange={handlePriceChange}
-    type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999"/>
+        value={precio}
+        onChange={handlePriceChange}
+        type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999"/>
     </div>
 
     <div>
     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
     <input 
-    value={categoria}
-    onChange={handleCategoryChange}
-    type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category"/>
+        value={categoria}
+        onChange={handleCategoryChange}
+        type="text" name="category" id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Category"/>
     </div>
 
     <div className="sm:col-span-2">
     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion</label>
     <input
-    value={descripcion}
-    onChange={handleDescriptionChange}
-    id="description" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></input>                    
+        value={descripcion}
+        onChange={handleDescriptionChange}
+        id="description" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></input>                    
     </div>
 
 
     <div className="sm:col-span-2">
     <div className="flex items-center justify-center w-full">
-{imagen === null ? (
+    {imagen === null ? (
 
         <label
-        htmlFor="dropzone-file"
-        className={`flex flex-col items-center justify-center w-full h-64 
-        border-2 border-gray-600 border-dashed rounded-lg 
-        cursor-pointer bg-gray-40 ${
-        isHovered ? 'bg-gray-600' : 'hover:bg-gray-600'
-        }`}
+            htmlFor="dropzone-file"
+            className={
+                `flex flex-col items-center justify-center w-full h-64 
+                border-2 border-gray-600 border-dashed rounded-lg 
+                cursor-pointer bg-gray-40 ${
+                    isHovered ? 'bg-gray-600' : 'hover:bg-gray-600'
+                }`
+            }
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         >
         <svg
-        aria-hidden="true"
-        className="w-10 h-10 mb-3 text-gray-400"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            className="w-10 h-10 mb-3 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
         >
         <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
         ></path>
         </svg>
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -216,13 +222,13 @@ return (
         </p>
         </div>
         <input
-        ref={inputRef}
-type="file"
-    id="dropzone-file"
-    multiple={true}
-onChange={handleFileChange}
-className="absolute w-full h-[300px] opacity-0"
-    />
+            ref={inputRef}
+            type="file"
+            id="dropzone-file"
+            multiple={true}
+            onChange={handleFileChange}
+            className="absolute w-full h-[300px] opacity-0"
+        />
     </label>
 
     ) : (

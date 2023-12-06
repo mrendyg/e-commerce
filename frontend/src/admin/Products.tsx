@@ -86,7 +86,7 @@ const Products = () => {
                     <th scope="col" className="px-4 py-3">Producto</th>
                     <th scope="col" className="px-4 py-3">Categoria</th>
                     <th scope="col" className="px-4 py-3">Stock</th>
-                    <th scope="col" className="px-4 py-3">Pecios</th>
+                    <th scope="col" className="px-4 py-3">Precio</th>
                     <th scope="col" className="px-4 py-3">Acciones</th>
                   </tr>
                 </thead>
@@ -130,10 +130,9 @@ const Products = () => {
                                   className="text-red-500 w-6 h-6 cursor-pointer hover:text-white"/>
                                 <AiFillEdit 
                                     onClick={() => { 
-                                      if (product.nombre) {
                                         setEdit(true)
                                         console.log("Estas editando " + product.nombre)     ////Revisar esta linea para poder editar los articulos
-                                      }}}
+                                      }}
                                   className="text-blue-500 w-6 h-6 cursor-pointer hover:text-white"/>
                               </div>
                             </td>

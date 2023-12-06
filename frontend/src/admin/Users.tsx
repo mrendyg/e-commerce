@@ -3,7 +3,8 @@ import { getUsersRequest, deleteUser } from "../api/users";
 import Loader from "../components/Loader";
 import  toast from "react-hot-toast";
 import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
+
+import { AiOutlineUser } from "react-icons/ai"
 import { User } from './InterfazUser';
 
 const Users = () => {
@@ -11,6 +12,17 @@ const Users = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['users'],
     queryFn: getUsersRequest,
+  })
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      useQueryClient.invalidateQueries(["users"])  //funciona
+      toast.success("Usuario eliminado exitosamente")
+    }, 
+    onError: (error) => {
+      console.error(error);
+    },
   })
 
   if(isLoading) return <Loader />
@@ -39,12 +51,12 @@ const Users = () => {
                 <BsFillTrashFill size={22} 
                   onClick={() => {
                     if (user.id) {
-                      //deleteUserMutation.mutate(user.id);
+                      deleteUserMutation.mutate(user.id);
                     }
                    }}
                   className="text-red-500 w-6 h-6  cursor-pointer"
-                  />
-                <AiFillEdit size={22} className="text-green-300 cursor-pointer"/>
+                />
+                <AiOutlineUser size={22} className="text-green-300 cursor-pointer"/>
               </td>
             </tr>
           ))}
