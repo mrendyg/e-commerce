@@ -1,5 +1,0 @@
-# Ignorar la carpeta 'movil'
-frontend/movilApp/
-
-# Ignorar el archivo
-.env/
