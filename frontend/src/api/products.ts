@@ -1,10 +1,17 @@
-import { authApi, axi } from "./useAxios"
-import { Product } from "../Interfaces"
+import { Product } from "../Interfaces";
+import { authApi, axi } from "./useAxios";
 
-export const searchProducts = async (nombre: string) => {
+/*  authAxios, 
+export const search_prod = async (nombre: string) => {
   const res = await axi.get(`products/search/?query=${nombre}`)
   return res.data
+}*/
+
+export const search_prod = async (query: string) => {
+  const response = await authApi.get(`/products/search/?query=${query}`)
+  return response.data;
 }
+
 
 export const deleteProduct = async (nombre: string) => {
   await authApi.delete(`products/delete/${nombre}/`)
