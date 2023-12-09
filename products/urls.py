@@ -11,5 +11,6 @@ urlpatterns = [
     # path('<str:name>/', views.product_detail),
     path('review/<str:name>/', views.ReviewList.as_view()),
     path('review/<str:name>/', views.ReviewDetail.as_view()),
+    path('cate/<str:category>/', views.get_prod_by_cate),
   
 ]

@@ -9,6 +9,8 @@ import AdminPage from "./pages/AdminPage";
 import SoloProduct from "./pages/SoloProduct";
 import Order from "./pages/Order";
 import Foo from "./pages/Foo";
+import CatePage from "./pages/CatePage";
+import SearchByCate from "./pages/SearchByCate";
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
             <Route path='product/:name' element={<SoloProduct/>} />
             <Route path='cart/' element={<Order/>} />
             <Route path='foo/' element={<Foo/>} />
+            <Route path='cate' element={<CatePage/>} />
+            <Route path='cate/:cate' element={<SearchByCate/>} />
           </Route>
 
           <Route path='admin' element={<AdminRoute/>}>

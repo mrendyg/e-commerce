@@ -7,6 +7,11 @@ export const search_prod = async (nombre: string) => {
   return res.data
 }*/
 
+export const cate_api = async (category: string) =>{
+  const response = await authApi.get(`/products/cate/${category}/`)
+  return response.data
+}
+
 export const search_prod = async (query: string) => {
   const response = await authApi.get(`/products/search/?query=${query}`)
   return response.data;

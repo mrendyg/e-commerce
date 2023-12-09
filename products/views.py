@@ -26,13 +26,14 @@ def mi_vista(request):
     queryset = MiModelo.objects.all().distinct('campo_deseado')
     serializer = MiModeloSerializer(queryset, many=True)
     return Response(serializer.data)
+'''
 
 @api_view(['GET'])
-def get_products_by_category(request, category):
-    products = Product.objects.filter(category=category)
+def get_prod_by_cate(request, category):
+    products = Producto.objects.filter(categoria__nombre=category)
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
-'''
+
 
 
 @api_view(['POST'])
@@ -48,7 +49,7 @@ def create_product(request):
     
 @api_view(['GET'])
 def product_list(request):
-    products = Producto.objects.all() # se debe añadir un order by
+    products = Producto.objects.all().order_by('nombre') # se debe añadir un order by
     paginator = CustomPagination()
     paginated_products = paginator.paginate_queryset(products, request)
     serializer = ProductSerializer(paginated_products, many=True)
