@@ -15,9 +15,9 @@ import { useSearchStore } from "../store/search";
 const Header = () => {
 
   const { toggleDarkMode, darkMode } = useDarkMode();
-  const token : string = useAuthStore.getState().access;
+  const token: string = useAuthStore.getState().access;
   const { isAuth } = useAuthStore()
-    const cart = useCartStore(state => state.cart);
+  const cart = useCartStore(state => state.cart);
 
   // new
   const searchTerm = useSearchStore((state) => state.searchTerm);
@@ -25,7 +25,7 @@ const Header = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-    console.log("Search Term:", event.target.value);
+    //console.log("Search Term:", event.target.value);
   };
   // end new -> pass to input
 
@@ -33,11 +33,11 @@ const Header = () => {
     is_staff: boolean
   }
 
-  if(isAuth) {
-    const tokenDecoded : Token = jwt_decode(token)
+  if (isAuth) {
+    const tokenDecoded: Token = jwt_decode(token)
     console.log(tokenDecoded)
-    var is_admin = (tokenDecoded.is_staff);  
-  } 
+    var is_admin = (tokenDecoded.is_staff);
+  }
 
   function logOutFun() {
     useAuthStore.getState().logout()
@@ -51,7 +51,7 @@ const Header = () => {
   // data array de productos
 
   return (
-    
+
     <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
       {({ open }) => (
         <>
@@ -64,8 +64,8 @@ const Header = () => {
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -83,7 +83,7 @@ const Header = () => {
                       <>
                         <Link
                           to={'/'}
-                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
+                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                         >
                           Inicio
                         </Link>
@@ -97,22 +97,22 @@ const Header = () => {
                       </>
 
                     ) : (
-                        <>
-                          <Link
-                            to={'/login'}
-                            className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
-                          >
-                            Log in
-                          </Link>
+                      <>
+                        <Link
+                          to={'/login'}
+                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                        >
+                          Log in
+                        </Link>
 
-                          <Link
-                            to={'/register'}
-                            className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                          >
-                            Sign up
-                          </Link>
-                        </>
-                      )}
+                        <Link
+                          to={'/register'}
+                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                        >
+                          Sign up
+                        </Link>
+                      </>
+                    )}
 
                     {is_admin && is_admin && (
                       <Link
@@ -134,15 +134,18 @@ const Header = () => {
                   <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
                   <span className="sr-only">Search icon</span>
                 </div>
-                <input type="text" id="search-navbar" className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2
+                <input type="text" 
+                  id="search-navbar"
+                  onChange={handleInputChange}
+                  className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2
                   pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
                   bg-gray-50 dark:bg-gray-700 outline-none
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                  " 
+                  "
                   placeholder="Search..."
-                  value={searchTerm}
-                  onChange={handleInputChange}
-                  />
+                /* value={searchTerm}
+                 onChange={handleInputChange}*/
+                />
               </div>
 
               <div className="absolute space-x-2 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -150,18 +153,18 @@ const Header = () => {
                   onClick={toggleDarkMode}
                   type="button"
                 >
-                  {darkMode ? 
+                  {darkMode ?
 
-                    <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white "/> 
+                    <BsFillMoonStarsFill size={20} className="text-slate-200 hover:text-white " />
 
-                    : 
+                    :
 
-                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black"/>}
+                    <BsFillSunFill size={23} className="text-slate-900 hover:text-black" />}
 
                 </button>
 
                 <Link to={'/cart'} className="text-slate-900 hover:text-black dark:text-slate-200 dark:hover:text-white">
-                  <HiOutlineShoppingBag size={23}/>
+                  <HiOutlineShoppingBag size={23} />
                 </Link>
                 <span className="text-slate-900 dark:text-slate-200">{cart.length}</span>
 
@@ -229,7 +232,7 @@ const Header = () => {
                 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
                 bg-gray-50 dark:bg-gray-700 outline-none
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  
-                " placeholder="Buscar..."/>
+                " placeholder="search..." />
             </div>
 
             <div className="space-y-1 px-2 pb-3 pt-2">
@@ -238,9 +241,9 @@ const Header = () => {
               {/* 'block rounded-md px-3 py-2 text-base font-medium' */}
               {isAuth ? (
                 <div className="w-full grid grid-cols-1">
-<Link
+                  <Link
                     to={'/'}
-                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
+                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
                   >
                     Home
                   </Link>
@@ -254,24 +257,24 @@ const Header = () => {
                 </div>
 
               ) : (
-                  <div className="w-full grid grid-cols-1">
-                    <Link
-                      to={'/'}
-                      className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white' 
-                    >
-                      Log in
-                    </Link>
+                <div className="w-full grid grid-cols-1">
+                  <Link
+                    to={'/'}
+                    className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                  >
+                    Log in
+                  </Link>
 
-                    <Link
-                      to={'/'}
-                      className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                    >
-Sign up
-                    </Link>
-</div>
-                )}
+                  <Link
+                    to={'/'}
+                    className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              )}
 
-              {is_admin  && (
+              {is_admin && (
                 <div className="w-full">
                   <Link
                     to={'/'}
