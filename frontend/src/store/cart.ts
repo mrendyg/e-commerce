@@ -3,13 +3,14 @@ import { persist } from "zustand/middleware";
 import { Product } from "../Interfaces";
 
 interface State {
- cart: Product[]
- totalPrice: number
+ cart: Product[],
+ totalPrice: number,
 }
 
 interface Actions {
-  addToCart: (Item: Product) => void
-  removeFromCart: (Item: Product) => void
+  addToCart: (Item: Product) => void,
+  removeFromCart: (Item: Product) => void,
+  removeAll: () => void,
 }
  
 
@@ -21,6 +22,13 @@ const State = {
 export const useCartStore = create(persist<State & Actions>((set, get) => ({
  cart: State.cart,
  totalPrice: State.totalPrice,
+
+ removeAll: () => {
+  set({
+     cart: [],
+     totalPrice: 0,
+  })
+},
 
  addToCart: (product: Product) => {
   const cart = get().cart

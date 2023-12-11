@@ -1,9 +1,8 @@
 import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
-import { getUsersRequest, deleteUser } from "../api/users";
+import { getUsersRequest, deleteUser, putStaffUser } from "../api/users";
 import Loader from "../components/Loader";
 import  toast from "react-hot-toast";
 import { BsFillTrashFill } from "react-icons/bs";
-
 import { AiOutlineUser } from "react-icons/ai"
 import { User } from './InterfazUser';
 
@@ -13,6 +12,8 @@ const Users = () => {
     queryKey: ['users'],
     queryFn: getUsersRequest,
   })
+
+
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
@@ -25,6 +26,19 @@ const Users = () => {
     },
   })
 
+
+  // const putStaffUserMutation = useMutation({
+  //   mutationFn: putStaffUser,
+  //   onSuccess: () => {
+  //     useQueryClient.invalidateQueries(["users"])
+  //     toast.success("Usuario agregado a Staff")
+  //   },
+  //   onError: (error) => {
+  //     console.error(error);
+  //   }
+  // })
+
+
   if(isLoading) return <Loader />
 
   if(error instanceof Error) return <>{toast.error(error.message)}</>
@@ -36,8 +50,11 @@ const Users = () => {
           <tr>
             <th scope="col" className="px-4 py-3">ID Usuario</th>
             <th scope="col" className="px-4 py-3">Nombre</th>
+            <th scope="col" className="px-4 py-3">Apellido</th>
             <th scope="col" className="px-4 py-3">Correo</th>
-            <th scope="col" className="px-4 py-3">Acciones</th>
+            <th scope="col" className="px-4 py-3">Borrar</th>
+            <th scope="col" className="px-4 py-3">Staff</th>
+
           </tr>
         </thead>
 
@@ -46,6 +63,7 @@ const Users = () => {
             <tr className="border-b dark:border-gray-700">
               <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.id}</th>
               <td className="px-4 py-3">{user.name}</td>
+              <td className="px-4 py-3">{user.last_name}</td>
               <td className="px-4 py-3">{user.email}</td>
               <td className="px-4 py-3 flex items-center justify-center gap-4">
                 <BsFillTrashFill size={22} 
@@ -56,7 +74,21 @@ const Users = () => {
                    }}
                   className="text-red-500 w-6 h-6  cursor-pointer"
                 />
-                <AiOutlineUser size={22} className="text-green-300 cursor-pointer"/>
+              </td>
+              <td className="px-4 py-3">
+                <div className="flex">
+                  <AiOutlineUser size={22} className="text-green-300 cursor-pointer"/>
+                  <input
+                    id="checkboxStaff"
+                    type="checkbox"
+                    className="h-5 w-5"
+                    checked={user.is_staff}
+                    onChange={(e) => {
+                      e.target.value;
+                    }}
+
+                  />
+                </div>
               </td>
             </tr>
           ))}
