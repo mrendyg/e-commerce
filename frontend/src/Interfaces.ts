@@ -11,7 +11,7 @@ export interface Product {
 
   export interface Order {
     total_price: number;
-    addres: string
+    address: string
     city: string
     orderItem: Product[]
 }
@@ -19,11 +19,3 @@ export interface Product {
   export interface Token {
       exp: number
   };
-
-  export interface Order {
-    total_price: number;
-    address: string
-    city: string
-    postal_code: string
-    order_items: Product[]
-};

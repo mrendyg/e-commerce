@@ -59,11 +59,10 @@ const CartPage = () => {
 
     const handleSubmit = () => {
         createOrderMut.mutate({
-            order_items: cart,
+            orderItem: cart,
             total_price: total_price,
             address: address,
             city: city,
-            postal_code: postal_code,
         });
     };
 
