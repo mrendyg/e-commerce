@@ -30,7 +30,7 @@ const SearchByCate = () => {
                 <Link to={`/product/${product.id}`}>
                     <img
                         className="rounded-t-lg"
-                        src={`${import.meta.env.VITE_BACKEND_URL}${product.imagen}`}
+                        src={`http://127.0.0.1:8000/${product.imagen}`}
                         alt=""
                     />
                 </Link>
