@@ -1,5 +1,5 @@
 import { Order } from "../Interfaces";
-import { axi, authApi } from "./useAxios";
+import {  authApi } from "./useAxios";
 
 
 export const search_order = async (query: string) => {
@@ -29,3 +29,5 @@ export const my_orders = async () => {
 export const create_order = async (data: Order) => {
     await authApi.post('/orders/create/', data)
 };
+
+

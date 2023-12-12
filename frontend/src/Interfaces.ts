@@ -8,7 +8,14 @@ export interface Product {
     categoria: string
     imagen: File | null;
   }
-  
+
+  export interface Order {
+    total_price: number;
+    addres: string
+    city: string
+    orderItem: Product[]
+}
+
   export interface Token {
       exp: number
   };
