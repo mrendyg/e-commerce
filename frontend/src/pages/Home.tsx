@@ -6,22 +6,12 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import SearchResults from "./SearchResults";
+import { useSearchStore } from "../store/search";
+const HomePage = () => {
 
-const Home = () => {
     const { ref, inView } = useInView();
-
-    const {
-        data,
-        isLoading,
-        error,
-        isFetchingNextPage,
-        fetchNextPage, 
-        hasNextPage,
-    } = useInfiniteQuery(["products"], getProducts, {
-        getNextPageParam: (page: any) => page.meta.next,
-    });
-
-    console.log(data);
+    const searchTerm = useSearchStore((state) => state.searchTerm);
 
     useEffect(() => {
         if (inView) {
@@ -29,7 +19,19 @@ const Home = () => {
         }
     }, [inView]);
 
-    if (isLoading) return <Loader />;
+    const {
+        data,
+        isLoading,
+        error,
+        isFetchingNextPage,
+        fetchNextPage,
+        hasNextPage,
+    } = useInfiniteQuery(["products"], getProducts, {
+        getNextPageParam: (page: any) => page.meta.next,
+    });
+
+
+    if (searchTerm) return <SearchResults />
     if (error instanceof Error) return <>{toast.error(error.message)}</>;
 
     return (
@@ -53,7 +55,7 @@ const Home = () => {
 
                     {!isLoading && data?.pages.length === 0 && (
                         <p className="text-xl text-slate-800 dark:text-slate-200">
-                            No hay mas resultados
+                            No more results
                         </p>
                     )}
                     {!isLoading &&
@@ -72,4 +74,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;
