@@ -1,10 +1,18 @@
-import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query";
-import { getUsersRequest, deleteUser, putStaffUser } from "../api/users";
+import { useQuery, useMutation, useQueryClient, QueryClient  } from "@tanstack/react-query";
+import { getUsersRequest, deleteUser, setStaffUser } from "../api/users";
 import Loader from "../components/Loader";
 import  toast from "react-hot-toast";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai"
 import { User } from './InterfazUser';
+import React, { useState, useEffect, ChangeEvent } from "react";
+
+
+interface Props {
+  param: string
+  close: () => void
+}
+
 
 const Users = () => {
 
@@ -12,8 +20,6 @@ const Users = () => {
     queryKey: ['users'],
     queryFn: getUsersRequest,
   })
-
-
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
@@ -26,17 +32,43 @@ const Users = () => {
     },
   })
 
+  // const editStaff = ({ close, param }: Props) => {
+  //   const [is_staff, setStaff] = useState<boolean>(false)
 
-  // const putStaffUserMutation = useMutation({
-  //   mutationFn: putStaffUser,
-  //   onSuccess: () => {
-  //     useQueryClient.invalidateQueries(["users"])
-  //     toast.success("Usuario agregado a Staff")
-  //   },
-  //   onError: (error) => {
-  //     console.error(error);
-  //   }
-  // })
+  //   useEffect(() => {
+  //     if(data){
+  //       setStaff(data.is_staff)
+  //     }
+  //   }, [data]);
+  
+  
+  //   const editUserStaffmutation = useMutation({
+  //     mutationFn: setStaffUser,
+  //     onSuccess: () => {
+  //       useQueryClient.invalidateQueries({ queryKey: ["users"]})
+  //       toast.success("Usuario modificado")
+  //     },
+  //     onError: (error) => {
+  //       console.error(error)
+  //     }
+  //   })
+  
+  //   const handleStaffChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //     event.preventDefault();
+  //     setStaff(true);
+  //   };
+
+  // }
+
+  
+
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   editUserStaffmutation.mutate({
+  //     is_staff: is_staff
+  //   })
+  //   close()
+  // }
 
 
   if(isLoading) return <Loader />
@@ -65,6 +97,7 @@ const Users = () => {
               <td className="px-4 py-3">{user.name}</td>
               <td className="px-4 py-3">{user.last_name}</td>
               <td className="px-4 py-3">{user.email}</td>
+              
               <td className="px-4 py-3 flex items-center justify-center gap-4">
                 <BsFillTrashFill size={22} 
                   onClick={() => {
@@ -77,17 +110,17 @@ const Users = () => {
               </td>
               <td className="px-4 py-3">
                 <div className="flex">
+                <p>Staff</p>
                   <AiOutlineUser size={22} className="text-green-300 cursor-pointer"/>
-                  <input
-                    id="checkboxStaff"
-                    type="checkbox"
-                    className="h-5 w-5"
-                    checked={user.is_staff}
-                    onChange={(e) => {
-                      e.target.value;
-                    }}
 
-                  />
+                
+                  <input
+                    type="checkbox"
+                    value={user.id}
+                    className="h-5 w-5"
+
+
+                  >{user.is_staff}</input>
                 </div>
               </td>
             </tr>

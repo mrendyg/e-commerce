@@ -25,7 +25,7 @@ export const deleteUser = async (id: number) => {
   await authApi.delete(`/users/delete/${id}`);
 }
 
-export const putStaffUser = async (email: string) => {
+export const setStaffUser = async (email: string) => {
   await authApi.put(`/users/edit/${email}`);
 }
 

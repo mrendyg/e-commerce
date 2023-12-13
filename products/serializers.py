@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from . models import Producto, Review
+from users.models import User
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -25,3 +26,4 @@ class ProductSerializer(serializers.ModelSerializer):
         reviews = obj.review_set.all()
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
+    

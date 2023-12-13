@@ -58,7 +58,6 @@ const EditProduct = ({ close, param }: Props) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         editProdMutation.mutate({ 
-            id: data.id,
             nombre: nombre, 
             cantidad_stock: cantidad_stock, 
             categoria: categoria, 

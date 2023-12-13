@@ -8,6 +8,8 @@ from . permissions import IsOwnerOrReadOnly
 from . models import Producto, Review
 from . serializers import ProductSerializer, ReviewSerializer
 from backend.pagination import CustomPagination
+from users.models import User
+from users.serializers import UserSerializer
 
 @api_view(['GET'])
 def search(request):
@@ -41,9 +43,12 @@ def create_product(request):
     if request.user.is_staff:
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save(usuario=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            # Imprime los errores de validación para depuración
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
     

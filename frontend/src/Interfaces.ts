@@ -4,18 +4,25 @@ export interface Product {
     descripcion: string
     precio: number
     cantidad?: number
-    cantidad_stock: number
     categoria: string
+    cantidad_stock: number
+    usuario?: number
     imagen: File | null;
   }
 
   export interface Order {
     total_price: number;
     address: string
-    city: string
     orderItem: Product[]
+    city: string
 }
 
   export interface Token {
       exp: number
   };
+
+  // export interface Categoria {
+  //   id?: number
+  //   nombre: string
+  //   descripcion: string;
+  // }

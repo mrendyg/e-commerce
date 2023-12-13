@@ -37,7 +37,7 @@ export const putProduct = async (data: Product) => {
   formData.append("nombre", data.nombre);
   formData.append("descripcion", data.descripcion);
   formData.append("cantidad_stock", data.cantidad_stock.toString());
-  formData.append("categoria", data.categoria);
+  formData.append("categoria", data.categoria.toString());
   formData.append("precio", data.precio.toString());
   if (data.imagen && typeof data.imagen !== "string") {
     formData.append("imagen", data.imagen);
@@ -49,9 +49,9 @@ export const postProduct = async (data: Product) => {
   const formData = new FormData();
   formData.append("nombre", data.nombre);
   formData.append("descripcion", data.descripcion);
-  formData.append("cantidad_stock", data.cantidad_stock.toString());
-  formData.append("categoria", data.categoria);
   formData.append("precio", data.precio.toString());
+  formData.append("categoria", data.categoria);
+  formData.append("cantidad_stock", data.cantidad_stock.toString());
   if (data.imagen) {
     formData.append("imagen", data.imagen);
   }

@@ -14,7 +14,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     cantidad_stock = models.IntegerField(null=True, blank=True, default=0)
-    # usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+    usuario = models.ForeignKey(User, default=(5), on_delete=models.CASCADE)  # Relación con el usuario
     imagen = models.ImageField(upload_to='./media/imagen_products/', null=True, blank=True)
     
     class Meta:
