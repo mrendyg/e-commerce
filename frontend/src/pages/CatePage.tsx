@@ -41,7 +41,7 @@ const CatePage = () => {
                 </div>
 
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <Link to={`/cate/Accesorios`}>
+                        <Link to={`/cate/Libros`}>
                         <img
                             className="rounded-t-lg"
                     src="/static/logo.png"
@@ -49,9 +49,9 @@ const CatePage = () => {
                         />
                     </Link>
                     <div className="p-5 ">
-                        <Link to={`/cate/Accesorios`}>
+                        <Link to={`/cate/Libros`}>
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            Accesorios
+                            Libros
                             </h5>
                         </Link>
                     </div>
