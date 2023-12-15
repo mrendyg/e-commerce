@@ -254,25 +254,16 @@ const CartPage = () => {
                 type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad"/>
               </div>
 
-            <div className="ml-[180px]">
-              <PayPalScriptProvider 
-              options={{ 
-                clientId: "",
-                currency: "CLP"
-              }}
-                  >
-                    <PayPalButtons 
-                    createOrder={(data, actions) => createOrder(data, actions)}
-                    onApprove={(data, actions) => onApprove(data, actions)}
-                    style={{ layout: "horizontal" }} 
-                    />
-                </PayPalScriptProvider>
-        </div>
 
         <button className="h-20  w-40  inline-flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pagar</button>
-
+        <div   style={{ height: '400px', width: '300px' }}>
+        <PayPalScriptProvider options={{ clientId: "test" }}>
+            <PayPalButtons style={{ layout: "horizontal" }}/>
+        </PayPalScriptProvider>
+        </div>
             </form>
-          </div>
+          </div >
+          
                 </div>
             </section>
 
