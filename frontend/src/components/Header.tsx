@@ -9,10 +9,14 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/auth";
 import jwt_decode from "jwt-decode";
 import { useCartStore } from "../store/cart";
+import { edit_user, get_solo_user } from "../api/users";
 // new
 import { useSearchStore } from "../store/search";
+import { HomePage } from "../pages/Home";
+
 
 const Header = () => {
+
 
   const { toggleDarkMode, darkMode } = useDarkMode();
   const token: string = useAuthStore.getState().access;
@@ -55,9 +59,11 @@ const Header = () => {
     <Disclosure as="nav" className="bg-grey dark:bg-gray-800">
       {({ open }) => (
         <>
+        
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                
 
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 dark:text-slate-200 dark:hover:text-slate-50">
                   <span className="sr-only">Open main menu</span>
@@ -68,29 +74,36 @@ const Header = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-
-
-                </div>
+              <div className="flex flex-3 items-center justify-center sm:items-stretch sm:justify-start">
+                
 
 
                 <div className="hidden sm:ml-6 sm:block">
 
                   <div className="flex space-x-4">
+                  
+                    <div className="flex flex-shrink-0 items-center">
+                    <Link to={`/`}>
+                    <img
+                    className="hidden h-8 w-auto lg:block"
+                    src="src/public/logo.png"
+                    alt="Logo"
+                    />
+                    </Link>
+                    </div>
 
                     {isAuth ? (
                       <>
                         <Link
                           to={'/'}
-                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                          className='text-black text-center self-center p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                         >
                           Inicio
                         </Link>
 
                         <Link
                           to={'/cate'}
-                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                          className='text-black  text-center self-center p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                         >
                           Categorias
                         </Link>
@@ -117,7 +130,7 @@ const Header = () => {
                     {is_admin && is_admin && (
                       <Link
                         to={'/admin'}
-                        className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                        className='text-black whitespace-nowrap text-center self-center justify-text p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                       >
                         Panel de administrador
                       </Link>
@@ -137,8 +150,8 @@ const Header = () => {
                 <input type="text" 
                   id="search-navbar"
                   onChange={handleInputChange}
-                  className="block w-full md:w-[200px] lg:w-[400px] xl:w-[600px] p-2
-                  pl-10 text-sm text-gray-900 border border-gray-300 rounded-full 
+                  className="block w-full md:w-[150px] lg:w-[300px] xl:w-[400px] p-2
+                  pl-8 text-sm text-gray-900 border border-gray-300 rounded-full 
                   bg-gray-50 dark:bg-gray-700 outline-none
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                   "
@@ -192,12 +205,12 @@ const Header = () => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white dark:bg-slate-950 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
-                            >
+                           <Link
+                           to="/profile"
+                           className={classNames(active ? 'bg-gray-100 dark:bg-slate-700' : '', 'block px-4 py-2 text-sm text-gray-700 dark:text-slate-200')}
+                         >
                               Tu perfil
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>

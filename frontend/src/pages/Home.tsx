@@ -8,6 +8,8 @@ import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import SearchResults from "./SearchResults";
 import { useSearchStore } from "../store/search";
+
+
 const HomePage = () => {
 
     const { ref, inView } = useInView();
