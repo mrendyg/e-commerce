@@ -13,6 +13,9 @@ import Foo from "./pages/Foo";
 import CatePage from "./pages/CatePage";
 import SearchByCate from "./pages/SearchByCate";
 import UserProfile from "./pages/UserProfile";
+import SoloOrder from "./pages/SoloOrder";
+import EditProduct from "./admin/EditProduct";
+
 
 
 function App() {
@@ -24,22 +27,25 @@ function App() {
 
           <Route element={<PrivateRoute/>}>
             <Route index element={<Home/>} />
-            <Route path='product/:nombre' element={<SoloProduct/>} />
+            <Route path='product/:nombre' element={<SoloProduct />} />
             <Route path='cart/' element={<CartPage/>} />
             <Route path='foo/' element={<Foo/>} />
             <Route path='cate' element={<CatePage/>} />
             <Route path='cate/:cate' element={<SearchByCate/>} />
             <Route path="profile" element={<UserProfile/>}/>
-            
+            <Route path="order/:id" element={<SoloOrder />} />
+
           </Route>
 
           <Route path='admin' element={<AdminRoute/>}>
             <Route index element={<AdminPage/>} />
+            <Route path="edit/:id" element={<EditProduct />} />
           </Route>
 
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route index element={<LandingPage />} />
+
 
         </Route>
       </Routes>

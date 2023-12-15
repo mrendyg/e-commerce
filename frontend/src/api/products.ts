@@ -22,12 +22,12 @@ export const deleteProduct = async (nombre: string) => {
   await authApi.delete(`products/delete/${nombre}/`)
 }
 
-export const getProduct = async (nombre: string) => {
-  if (!nombre) {
+export const getProduct = async (id: number) => {
+  if (!id) {
     throw new Error('No se encontró ningún producto con ese nombre.'); 
   }
 
-  const res = await axi.get(`products/get/${nombre}`)
+  const res = await axi.get(`products/get/${id}`)
   return res.data
   
 }

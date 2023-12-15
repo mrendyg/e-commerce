@@ -62,8 +62,8 @@ def product_list(request):
 
 
 @api_view(['GET'])
-def get_solo_product(request, name):
-    product = Producto.objects.get(nombre=name)
+def get_solo_product(request, pk):
+    product = Producto.objects.get(id=pk)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 
@@ -77,7 +77,7 @@ def edit_product(request, name):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    print(request.data)
+    print(request.data)    
     return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 

@@ -10,6 +10,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { Product } from "../Interfaces";
 import AddProduct from './ProductForm';
 import EditProduct from './EditProduct';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
 
@@ -128,21 +129,25 @@ const Products = () => {
                                     }
                                   }}
                                   className="text-red-500 w-6 h-6 cursor-pointer hover:text-white"/>
+                                <Link
+                                  to={`edit/${product.id}`}
+                                >
                                 <AiFillEdit 
                                     onClick={() => { 
                                         setEdit(true)
                                         console.log("Estas editando " + product.nombre)     ////Revisar esta linea para poder editar los articulos
                                       }}
                                   className="text-blue-500 w-6 h-6 cursor-pointer hover:text-white"/>
+                                </Link>
                               </div>
                             </td>
                           </tr>
         
-              {edit && (
+              {/* {edit && (
                 
-        <EditProduct param={product.nombre} close={() => setEdit(false)} />
+        // <EditProduct param={product.nombre} close={() => setEdit(false)} />
 
-              )}
+              )} */}
 
                         </>
 

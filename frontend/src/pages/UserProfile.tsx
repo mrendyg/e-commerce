@@ -42,7 +42,7 @@ const UserProfile = () => {
         mutationFn: edit_user,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
-            toast.success("Profile updated!");
+            toast.success("Perfil actuaizado");
             setShow(true);
         },
         onError: () => {
