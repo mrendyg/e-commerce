@@ -29,7 +29,7 @@ function App() {
             <Route path='foo/' element={<Foo/>} />
             <Route path='cate' element={<CatePage/>} />
             <Route path='cate/:cate' element={<SearchByCate/>} />
-            <Route path="profile" element={<UserProfile/>} />
+            <Route path="profile" element={<UserProfile/>}/>
             
           </Route>
 

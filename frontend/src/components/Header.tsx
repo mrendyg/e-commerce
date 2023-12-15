@@ -12,7 +12,7 @@ import { useCartStore } from "../store/cart";
 import { edit_user, get_solo_user } from "../api/users";
 // new
 import { useSearchStore } from "../store/search";
-import { HomePage } from "../pages/Home";
+
 
 
 const Header = () => {
