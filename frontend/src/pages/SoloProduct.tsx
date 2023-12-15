@@ -12,7 +12,8 @@ const SoloProduct = () => {
 
     const { nombre } = useParams();
 
-    const { data,  isLoading, error } = useQuery(['product', nombre], () => getProduct(nombre));
+    const { data,  isLoading, error } = useQuery
+    (['product', nombre], () => getProduct(nombre));
 
     if (isLoading) return <Loader/>
     if(error instanceof Error) return <>{toast.error(error.message)}</>
@@ -24,6 +25,10 @@ const SoloProduct = () => {
         <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                 {data.nombre}
+                <span className="text-green-300 ml-4">
+                ${data.precio}
+                </span>
+                
             </h2>
             <p className="mb-4 font-bold">
                 {data.descripcion}
