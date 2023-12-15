@@ -11,5 +11,6 @@ urlpatterns = [
     path('review/<str:name>/', views.ReviewList.as_view()),
     path('review/<str:name>/', views.ReviewDetail.as_view()),
     path('cate/<str:category>/', views.get_prod_by_cate),
+    path('get/admin/<int:id>/', views.get_product_admin),
   
 ]

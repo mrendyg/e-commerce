@@ -6,9 +6,9 @@ const Reviews = () => {
 <section className="bg-white dark:bg-gray-900">
   <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
       <div className="mx-auto max-w-screen-sm">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Latop de gato</h2>
+          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white"></h2>
           <p className="mb-8 font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">
-          Explore the reivews of this product
+          Explora las reseñas de este producto.
           </p>
       </div> 
       </div> 

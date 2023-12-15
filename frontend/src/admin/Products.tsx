@@ -145,7 +145,7 @@ const Products = () => {
         <EditProduct param={product.id} close={() => setEdit(false)} />
 
               )}
-
+|
                         </>
 
                       ))}
