@@ -7,6 +7,12 @@ export const search_prod = async (nombre: string) => {
   return res.data
 }*/
 
+export const get_solo = async (nombre: string) => {
+  const res = await axi.get(`products/get/${nombre}`)
+  return res.data
+  
+}
+
 export const cate_api = async (category: string) =>{
   const response = await authApi.get(`/products/cate/${category}/`)
   return response.data
