@@ -59,6 +59,7 @@ const EditProduct = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["products"] });
             toast.success("Producto editado!")
+            navigate('/admin')
         },
         onError: (error) => {
             toast.error("Error al editar")
