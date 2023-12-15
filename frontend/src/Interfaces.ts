@@ -18,7 +18,8 @@ export interface Product {
 }
 
   export interface Token {
-      exp: number
+    exp: number
+    user_id: number;
   };
 
   // export interface Categoria {

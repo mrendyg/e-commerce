@@ -1,4 +1,5 @@
 import { authApi, axi } from "./useAxios";
+import { User } from "../admin/InterfazUser";
 
 
 export const search_users = async (query: string) => {
@@ -28,6 +29,24 @@ export const deleteUser = async (id: number) => {
 export const setStaffUser = async (email: string) => {
   await authApi.put(`/users/edit/${email}`);
 }
+
+
+export const edit_user = async (data: User) => {
+  const formData = new FormData();
+  formData.append("name", data.name)
+  formData.append("last_name", data.last_name)
+  formData.append("email", data.email)
+  if (data.avatar) {
+      formData.append("avatar", data.avatar)
+  }
+  await authApi.put(`/users/edit/${data.email}/`, formData)
+};
+
+export const get_solo_user = async (id: number) => {
+  const response = await authApi.get(`/users/get/solo/${id}/`) 
+  return response.data
+};
+
 
 // Old users request
 /*

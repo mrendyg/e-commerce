@@ -100,16 +100,16 @@ const Header = () => {
                       <>
                         <Link
                           to={'/login'}
-                          className='bg-slate-400 p-2 px-4 rounded-lg text-black dark:bg-gray-900 dark:text-white'
+                          className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                         >
-                          Log in
+                          Ingresar
                         </Link>
 
                         <Link
                           to={'/register'}
                           className='text-black p-2 px-4 rounded-lg hover:bg-slate-400 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
                         >
-                          Sign up
+                          Registrarse
                         </Link>
                       </>
                     )}
@@ -142,7 +142,7 @@ const Header = () => {
                   bg-gray-50 dark:bg-gray-700 outline-none
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                   "
-                  placeholder="Search..."
+                  placeholder="Buscar..."
                 /* value={searchTerm}
                  onChange={handleInputChange}*/
                 />

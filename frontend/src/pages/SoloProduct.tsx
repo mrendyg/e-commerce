@@ -7,6 +7,7 @@ import Reviews from "../components/Reviews";
 import { Product } from "../Interfaces";
 
 
+
 const SoloProduct = () => {
 
     const { nombre } = useParams();

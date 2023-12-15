@@ -1,7 +1,7 @@
 export interface User {
-    id: number
+    id?: number
     name: string
     last_name: string
     email: string
-    is_staff: boolean
+    avatar: File | null;
   }

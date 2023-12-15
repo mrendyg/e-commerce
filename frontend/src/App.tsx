@@ -12,6 +12,7 @@ import CartPage from "./pages/cartPage";
 import Foo from "./pages/Foo";
 import CatePage from "./pages/CatePage";
 import SearchByCate from "./pages/SearchByCate";
+import UserProfile from "./pages/UserProfile";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path='foo/' element={<Foo/>} />
             <Route path='cate' element={<CatePage/>} />
             <Route path='cate/:cate' element={<SearchByCate/>} />
+            
           </Route>
 
           <Route path='admin' element={<AdminRoute/>}>

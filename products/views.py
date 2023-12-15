@@ -111,3 +111,9 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+@api_view(['GET'])
+def get_product_admin(request, id):
+    products = Producto.objects.get(id=id)
+    serializer = ProductSerializer(products, many=False)
+    return Response(serializer.data)

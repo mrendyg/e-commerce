@@ -130,8 +130,10 @@ const Products = () => {
                                   className="text-red-500 w-6 h-6 cursor-pointer hover:text-white"/>
                                 <AiFillEdit 
                                     onClick={() => { 
-                                        setEdit(true)
-                                        console.log("Estas editando " + product.nombre)     ////Revisar esta linea para poder editar los articulos
+                                        if(product.id) {
+                                          setEdit(true)
+                                          console.log("Estas editando " + product.nombre)     ////Revisar esta linea para poder editar los articulos
+                                        }
                                       }}
                                   className="text-blue-500 w-6 h-6 cursor-pointer hover:text-white"/>
                               </div>
@@ -140,7 +142,7 @@ const Products = () => {
         
               {edit && (
                 
-        <EditProduct param={product.nombre} close={() => setEdit(false)} />
+        <EditProduct param={product.id} close={() => setEdit(false)} />
 
               )}
 

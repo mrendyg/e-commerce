@@ -3,6 +3,8 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { putProduct, getProduct } from '../api/products';
 import Loader from '../components/Loader';
 import { Product } from '../Interfaces';
+import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 interface Props {
     param: string
@@ -11,7 +13,7 @@ interface Props {
 
 // https://react-dropzone.org/#!/Examples
 
-const EditProduct = ({ close, param }: Props) => {
+const EditProduct = () => {
 
     const [nombre, setName] = useState<string>('');
     const [cantidad_stock, setCountInStock] = useState<number>(0);
@@ -27,9 +29,17 @@ const EditProduct = ({ close, param }: Props) => {
     //console.log(imagen)
 
 
+    const { id } = useParams();
+    let prodId: number;
+
+    if (id !== undefined) {
+        prodId = Number(id)
+    }
+
+
     const { data } = useQuery({
-        queryFn: () => getProduct(param),
-        queryKey: ['product']
+        queryFn: () => getProduct(prodId),
+        queryKey: ['product', id]
     });
 
     useEffect(() => {
@@ -40,7 +50,6 @@ const EditProduct = ({ close, param }: Props) => {
             setPrice(data.precio);
             setDescription(data.descripcion);
             setImage(data.imagen);
-
         }
         }, [data]);
 
@@ -49,6 +58,7 @@ const EditProduct = ({ close, param }: Props) => {
         mutationFn: putProduct,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["product"] });
+            toast.success("Producto editado!")
         },
         onError: (error) => {
             console.error(error);
@@ -58,6 +68,7 @@ const EditProduct = ({ close, param }: Props) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         editProdMutation.mutate({ 
+            id: prodId,
             nombre: nombre, 
             cantidad_stock: cantidad_stock, 
             categoria: categoria, 
@@ -214,7 +225,7 @@ return (
         </svg>
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-        <span className="font-semibold">Click to upload</span> or drag and drop
+        <span className="font-semibold">Haga clic para cargar</span> o arrastre y suelte
         </p>
         <p className="text-xs text-gray-500 dark:text-gray-400">
         SVG, PNG, JPG or GIF (MAX. 800x400px)

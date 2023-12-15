@@ -8,7 +8,7 @@ const SoloProduct = (props: { product: Product }) => {
   const { nombre } = product; 
 
   const { data } = useQuery({
-    queryFn: () => getProduct(nombre),
+    queryFn: () => getProduct(product.nombre),
     queryKey: ['Product', nombre]
   });
 

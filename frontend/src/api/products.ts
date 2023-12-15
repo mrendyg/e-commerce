@@ -22,15 +22,20 @@ export const deleteProduct = async (nombre: string) => {
   await authApi.delete(`products/delete/${nombre}/`)
 }
 
-export const getProduct = async (nombre: string) => {
-  if (!nombre) {
+export const getProduct = async (id: number) => {
+  if (!id) {
     throw new Error('No se encontró ningún producto con ese nombre.'); 
   }
 
-  const res = await axi.get(`products/get/${nombre}`)
-  return res.data
-  
-}
+  try {
+    const res = await axi.get(`products/get/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Error al obtener el producto:', error);
+    throw new Error('Error al obtener el producto.');
+  }
+};
+
 
 export const putProduct = async (data: Product) => {
   const formData = new FormData();
@@ -63,3 +68,8 @@ export const getProducts = async ({ pageParam = 1 }) => {
   const response = await axi.get(`/products/?page=${pageParam}&pages=9`);
   return response.data;
 }
+
+export const get_solo_prod = async (id: number) => {
+  const response = await authApi.get(`/products/get/admin/${id}/`)
+  return response.data
+};

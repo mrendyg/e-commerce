@@ -85,8 +85,6 @@ const Users = () => {
             <th scope="col" className="px-4 py-3">Apellido</th>
             <th scope="col" className="px-4 py-3">Correo</th>
             <th scope="col" className="px-4 py-3">Borrar</th>
-            <th scope="col" className="px-4 py-3">Staff</th>
-
           </tr>
         </thead>
 
@@ -107,21 +105,6 @@ const Users = () => {
                    }}
                   className="text-red-500 w-6 h-6  cursor-pointer"
                 />
-              </td>
-              <td className="px-4 py-3">
-                <div className="flex">
-                <p>Staff</p>
-                  <AiOutlineUser size={22} className="text-green-300 cursor-pointer"/>
-
-                
-                  <input
-                    type="checkbox"
-                    value={user.id}
-                    className="h-5 w-5"
-
-
-                  >{user.is_staff}</input>
-                </div>
               </td>
             </tr>
           ))}
