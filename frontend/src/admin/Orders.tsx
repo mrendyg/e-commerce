@@ -7,7 +7,7 @@ import { AiFillEdit } from "react-icons/ai";
 
 interface User {
   id: string
-  username: string
+  name: string
   email: string
 }
 
