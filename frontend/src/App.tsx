@@ -15,6 +15,7 @@ import SearchByCate from "./pages/SearchByCate";
 import UserProfile from "./pages/UserProfile";
 import SoloOrder from "./pages/SoloOrder";
 import EditProduct from "./admin/EditProduct";
+import { PayShop } from "./pages/PayShop";
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route index element={<Home/>} />
             <Route path='product/:nombre' element={<SoloProduct />} />
             <Route path='cart/' element={<CartPage/>} />
+            <Route path='pay/' element={<PayShop />} />
             <Route path='foo/' element={<Foo/>} />
             <Route path='cate' element={<CatePage/>} />
             <Route path='cate/:cate' element={<SearchByCate/>} />
