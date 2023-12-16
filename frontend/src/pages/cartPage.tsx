@@ -6,8 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { enviarCorreo } from "../components/Sendgridmail";
-import Dropzone, { useDropzone } from "react-dropzone";
-import { Basic } from "../components/Dropzone";
+
 
 
 const CartPage = () => {
@@ -279,8 +278,11 @@ const CartPage = () => {
         
         
         <div  className="h-19  w-40 justify-center flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-yellow-400 dark:hover:bg-yellow-400 dark:focus:ring-blue-800" >
-        <PayPalScriptProvider options={{ clientId: "test" }}>
-            <PayPalButtons style={{ layout: "horizontal" }}/>
+        <PayPalScriptProvider options={{ clientId: "AWYOY5fwfqm_DS3lftOKqKLAxxilCFzu0p-mFWJcvrp7jvD0J0S8R0xYfBPz6aMMN3-y3EiOhukJ9pd5" }}>
+            <PayPalButtons 
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+            style={{ layout: "horizontal" }}/>
         </PayPalScriptProvider>
         </div>
         </div>   
