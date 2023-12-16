@@ -5,6 +5,8 @@ import { create_order } from "../api/orders";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import axios from 'axios';
+
 
 const CartPage = () => {
 
@@ -36,6 +38,8 @@ const CartPage = () => {
         },
     });
 
+
+
     const createOrder = (data: any, actions: any) => {
         console.log(data)
         return actions.order.create({
@@ -64,6 +68,9 @@ const CartPage = () => {
             address: address,
             city: city,
         });
+
+ 
+        
     };
 
 
@@ -255,10 +262,14 @@ const CartPage = () => {
               </div>
 
 
-        <button className="h-20  w-40  inline-flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pagar</button>
+        <button onClick={handleSubmit} 
+        className="h-20  w-40  inline-flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pagar</button>
         <div   style={{ height: '400px', width: '300px' }}>
-        <PayPalScriptProvider options={{ clientId: "test" }}>
-            <PayPalButtons style={{ layout: "horizontal" }}/>
+        <PayPalScriptProvider options={{ clientId: "AWYOY5fwfqm_DS3lftOKqKLAxxilCFzu0p-mFWJcvrp7jvD0J0S8R0xYfBPz6aMMN3-y3EiOhukJ9pd5" }}>
+            <PayPalButtons 
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+            style={{ layout: "horizontal" }}/>
         </PayPalScriptProvider>
         </div>
             </form>
