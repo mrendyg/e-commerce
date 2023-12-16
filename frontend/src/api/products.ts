@@ -32,6 +32,16 @@ export const getProduct = async (id: number) => {
   
 }
 
+export const get_solo_product = async (nombre: string) => {
+  if (!nombre) {
+    throw new Error('No se encontró ningún producto con ese nombre.'); 
+  }
+
+  const res = await axi.get(`products/get/client/${nombre}`)
+  return res.data
+  
+}
+
 export const putProduct = async (data: Product) => {
   const formData = new FormData();
   formData.append("nombre", data.nombre);

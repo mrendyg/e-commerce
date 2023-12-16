@@ -10,7 +10,7 @@ const CatePage = () => {
                     <Link to={`/cate/"Electrónicos"`}>
                         <img
                             className="rounded-t-lg"
-                    src="/static/logo.png"
+                            src="/static/logo.png"
                             alt=""
                         />
                     </Link>

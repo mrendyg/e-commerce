@@ -62,11 +62,16 @@ def product_list(request):
 
 
 @api_view(['GET'])
-def get_solo_product(request, pk):
-    product = Producto.objects.get(id=pk)
+def get_solo_product(request, id):
+    product = Producto.objects.get(id=id)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_product_client(request, nombre):
+    product = Producto.objects.get(nombre=nombre)
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)
 
 @api_view(['PUT'])
 def edit_product(request, name):

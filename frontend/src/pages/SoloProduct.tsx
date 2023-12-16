@@ -1,4 +1,4 @@
-import { getProduct } from "../api/products";
+import { get_solo_product } from "../api/products";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -19,7 +19,9 @@ const SoloProduct = ({ product }: Props) => {
     
 
     const { data,  isLoading, error } = useQuery
-    (['product', nombre], () => getProduct(nombre));
+    (['product', nombre], () => get_solo_product(nombre));
+
+    console.log(nombre)
 
     if (isLoading) return <Loader/>
     if(error instanceof Error) return <>{toast.error(error.message)}</>
