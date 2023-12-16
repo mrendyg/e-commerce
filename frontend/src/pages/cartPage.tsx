@@ -40,7 +40,6 @@ const CartPage = () => {
         },
     });
 
-
     const createOrder = (data: any, actions: any) => {
         console.log(data)
         return actions.order.create({
@@ -69,6 +68,9 @@ const CartPage = () => {
             address: address,
             city: city,
         });
+
+ 
+        
     };
 
 
