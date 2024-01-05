@@ -278,7 +278,7 @@ const CartPage = () => {
         
         
         <div  className="h-19  w-40 justify-center flex items-center mx-3 px-3 py-2 text-sm font-medium text-center text-white bg-yellow-400 rounded-lg hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-yellow-400 dark:hover:bg-yellow-400 dark:focus:ring-blue-800" >
-        <PayPalScriptProvider options={{ clientId: "AWYOY5fwfqm_DS3lftOKqKLAxxilCFzu0p-mFWJcvrp7jvD0J0S8R0xYfBPz6aMMN3-y3EiOhukJ9pd5" }}>
+        <PayPalScriptProvider options={{ clientId: "AcMG5XLWKnMlE1mJsfA5ISt9RmPHydMamN69G_T_E4W6BiNzJMd4s1H1vDfYrPwtwVAjIUihg8hvbZb8" }}>
             <PayPalButtons 
             createOrder={(data, actions) => createOrder(data, actions)}
             onApprove={(data, actions) => onApprove(data, actions)}
