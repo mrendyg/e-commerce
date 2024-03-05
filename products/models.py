@@ -9,7 +9,8 @@ class Categoria(models.Model):
         db_table = 'Categoria'
 
 class Producto(models.Model):
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, unique=True)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)

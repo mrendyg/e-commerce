@@ -10,7 +10,7 @@ import { User } from '../admin/InterfazUser';
 
 const LoginPage = () => {
 
-        const navigate = useNavigate();
+  const navigate = useNavigate();
   const setToken = useAuthStore((state) => state.setToken);
   const { isAuth } = useAuthStore()
 

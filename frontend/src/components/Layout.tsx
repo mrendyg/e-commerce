@@ -2,6 +2,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import { Toaster } from 'react-hot-toast';
+import Form from './FormCar'
 // new
 //import { useSearchStore } from '../store/search';
 //import SearchResults from '../pages/SearchResults';
@@ -23,6 +24,7 @@ const Layout = () => {
     <div>
       <Toaster />
       <Header />
+      <Form />
       <div className="min-h-[1000px] bg-white dark:bg-gray-900">
       
           <Outlet />
